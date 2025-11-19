@@ -56,7 +56,7 @@ browser-logs/
 *.key
 ssh-public-key.txt
 
-# Documentation (temporary)
-*.md
-!README.md
+# Documentation
+# *.md
+# !README.md
 
