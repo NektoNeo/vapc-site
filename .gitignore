@@ -56,6 +56,9 @@ browser-logs/
 *.key
 ssh-public-key.txt
 
+# Cursor configuration with secrets
+.cursorrules
+
 # Documentation
 # *.md
 # !README.md
