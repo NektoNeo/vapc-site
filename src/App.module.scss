@@ -1,0 +1,328 @@
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #090808;
+  background-image: url("./images/grid.svg");
+  background-position: top center;
+  background-size: contain;
+  background-repeat: repeat;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+.NotFound {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+.NotFoundTitle {
+  margin-top: 350px;
+  font-family: 'RS';
+  color: white;
+  font-size: 48px;
+  margin-bottom: 80px;
+}
+
+.NotFoundBtn {
+  text-align: center;
+}
+
+.main {
+  position: relative;
+  &::before {
+    content: "";
+    width: 100%;
+    height: 700px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0.74;
+    background: linear-gradient(0deg, rgba(9, 8, 8, 0.00) 0%, #090808 100%);
+    z-index: -1;
+  }
+}
+
+.mainBlock {
+  .container {
+    max-width: 1200px;
+  }
+}
+
+.newsBlock {
+  margin-top: 50px;
+  position: relative;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.services {
+  margin-top: 63px;
+  position: relative;
+}
+
+.servicesLightRight {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 184px;
+  height: 168px;
+  background: #ffffff;
+  opacity: 1;
+  filter: blur(171px);
+  -webkit-filter: blur(171px);
+  -ms-filter: blur(171px);
+  // filter: url("data:image/svg+xml;utf9,<svg%20version='1.1'%20xmlns='http://www.w3.org/2000/svg'><filter%20id='blur'><feGaussianBlur%20stdDeviation='3'%20/></filter></svg>#blur");
+  filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='243'); 
+}
+
+.servicesLightLeft {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 184px;
+  height: 168px;
+  background: #ffffff;
+  opacity: 1;
+  filter: blur(171px);
+  -webkit-filter: blur(171px);
+  -ms-filter: blur(171px);
+  // filter: url("data:image/svg+xml;utf9,<svg%20version='1.1'%20xmlns='http://www.w3.org/2000/svg'><filter%20id='blur'><feGaussianBlur%20stdDeviation='3'%20/></filter></svg>#blur");
+  filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='243'); 
+}
+
+@-moz-document url-prefix()
+{
+  .servicesLightRight {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 487px;
+    height: 450px;
+    background: #ffffff;
+    opacity: 0.1;
+    filter: blur(204px);
+    -webkit-filter: blur(200px);
+    -ms-filter: blur(200px);
+    // filter: url("data:image/svg+xml;utf9,<svg%20version='1.1'%20xmlns='http://www.w3.org/2000/svg'><filter%20id='blur'><feGaussianBlur%20stdDeviation='3'%20/></filter></svg>#blur");
+    filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='243'); 
+  }
+  .servicesLightLeft {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 487px;
+    height: 450px;
+    background: #ffffff;
+    opacity: 0.1;
+    filter: blur(204px);
+    -webkit-filter: blur(200px);
+    -ms-filter: blur(200px);
+    // filter: url("data:image/svg+xml;utf9,<svg%20version='1.1'%20xmlns='http://www.w3.org/2000/svg'><filter%20id='blur'><feGaussianBlur%20stdDeviation='3'%20/></filter></svg>#blur");
+    filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='243'); 
+  }
+}
+
+.social {
+  margin-top: 70px;
+}
+
+.servicesTitle {
+  margin-bottom: 17px;
+}
+
+.stepsTypography {
+  margin-top: 88px;
+}
+
+.productsTypography {
+  margin-top: 100px;
+}
+
+.payment {
+  margin-top: 100px;
+}
+
+.gifts {
+  margin-top: 105px;
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: -156px;
+    background-image: url("./images/backgrounds/glob.png");
+    background-position: bottom;
+    background-repeat: no-repeat;
+    width: 442px;
+    height: 1095px;
+  }
+}
+
+.products {
+  .container {
+    max-width: 1130px;
+  }
+}
+
+.advantages {
+  .container {
+    max-width: 1230px;
+  }
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: -156px;
+    background-image: url("./images/backgrounds/glob2.png");
+    background-position: bottom;
+    background-repeat: no-repeat;
+    width: 366px;
+    height: 928px;
+  }
+}
+
+.cases {
+  position: relative;
+  &::after {
+    content: "";
+    top: -480px;
+    width: 100%;
+    height: 1750px;
+    position: absolute;
+    background-image: url("./images/backgrounds/glob4.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    z-index: -1;
+  }
+  .container {
+    max-width: 1090px;
+  }
+}
+
+.steps {
+  .container {
+    position: relative;
+  }
+}
+
+.stepsMiniCross {
+  position: absolute;
+  right: 306px;
+  top: 49px;
+}
+
+.live {
+  .container {
+    max-width: 100%;
+    max-width: 100%;
+    padding: 0;
+  }
+}
+
+.form {
+  .container {
+    max-width: 1180px;
+  }
+}
+
+.footer {
+  position: relative;
+  .container {
+    max-width: 1230px;
+  }
+  &:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: -1;
+    width: 100%;
+    height: 300px;
+    background-repeat: no-repeat;
+    background: linear-gradient(180deg, rgba(9, 8, 8, 0.00) 0%, #090808 100%);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  body {
+    background-size: 130%;
+  }
+  .servicesLightRight, .servicesLightLeft {
+     display: none;
+  }
+  .services {
+    margin-top: 0px;
+  }
+  .steps {
+    margin-top: 65px;
+  }
+  .payment {
+    margin-top: 0px;
+  }
+  .stepsTypography {
+    font-size: 26px;
+    font-weight: 400;
+    line-height: normal;
+    margin-bottom: -55px;
+  }
+  .socialTypography {
+    font-size: 26px !important;
+  }
+  .stepsTypography {
+    font-size: 26px !important;
+  }
+  .advantagesTypography {
+    font-size: 26px !important;
+  }
+  .servicesTitle {
+    font-size: 26px !important;
+  }
+  .productsTypography {
+    font-size: 26px !important;
+    margin-top: -20px;
+  }
+  .giftsTypography {
+    position: relative;
+    font-size: 26px !important;
+    z-index: 10;
+  }
+  .social {
+    margin-top: 25px;
+  }
+  .cases {
+    margin-top: 65px;
+  }
+  .live {
+    margin-top: 66px;
+  }
+  .gifts {
+    margin-top: 0px;
+  }
+  .advantages {
+    margin-top: 70px;
+  }
+ }
+
+ @media screen and (max-width: 520px) {
+  .advantagesTypography {
+    font-size: 26px !important;
+  }
+  .socialTypography {
+    font-size: 26px !important;
+  }
+  .advantages {
+    &::before {
+      width: 288px;
+    }
+  }
+}
+//  font-size: 26px;

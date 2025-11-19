@@ -1,0 +1,91 @@
+.footerCreditText {
+  font-weight: 800;
+  font-size: 12px;
+  text-transform: uppercase;
+  text-align: center;
+  background: linear-gradient(180deg, #fff 49.53%, #a4a4a4 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  background: #0a0b0d;
+  border-radius: 15px;
+  border: 1px solid #8655ff;
+  padding: 16px 0;
+  text-shadow: 0 0px 1px 0 rgba(0, 0, 0, 0.74), 0 1px 0 0 #7047d6;
+  margin-bottom: 12px;
+}
+
+.footerGarantTimeImage {
+  // font-size: 0px;
+  width: 80px;
+  height: 80px;
+}
+
+.footerGarant {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 13px 10px;
+  backdrop-filter: blur(18.28249740600586px);
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  border: 1px solid #8655ff;
+  margin-bottom: 12px;
+}
+
+.footerGarantTimeText {
+  font-size: 13px;
+  line-height: 89%;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.footerGarantText {
+  font-weight: 800;
+  font-size: 12px;
+  text-transform: uppercase;
+  background: linear-gradient(180deg, #fff 49.53%, #a4a4a4 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0px 1px 0 rgba(0, 0, 0, 0.74), 0 1px 0 0 #7047d6;
+}
+
+.footerDelivery {
+  border-radius: 15px;
+  background: #0a0b0d;
+  border: 1px solid #8655FF;
+  padding: 18px 16px;
+}
+
+.footerDeliveryHeader {
+  display: flex;
+  justify-content: space-between;
+}
+
+.footerDeliveryHeaderText {
+  font-weight: 800;
+  font-size: 12px;
+  text-transform: uppercase;
+  background: linear-gradient(180deg, #fff 49.53%, #a4a4a4 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0px 1px 0 rgba(0, 0, 0, 0.74), 0 0px 0 0 #7047d6;
+}
+
+.footerDeliveryNotice {
+  margin-top: 18px;
+  font-weight: 400;
+  font-size: 10px;
+  background: linear-gradient(180deg, #fff 49.53%, #a4a4a4 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.footerDeliveryHeaderIcon {
+  width: 73px;
+  height: 32px;
+}

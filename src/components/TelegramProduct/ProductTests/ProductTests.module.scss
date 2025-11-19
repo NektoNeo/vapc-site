@@ -1,0 +1,28 @@
+.testItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 15px;
+  padding: 18px 11px;
+  background: linear-gradient(90deg, rgba(35, 35, 35, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%);
+  border: 1px solid white;
+  margin-bottom: 10px;
+  max-height: 58px;
+}
+
+.testTitle {
+  font-weight: 400;
+  font-size: 12px;
+  color: #b4b4b4;
+  line-height: 127%;
+}
+
+.testValue {
+  font-weight: 600;
+  font-size: 12px;
+  color: #fff;
+  line-height: 127%;
+  max-width: 121px;
+  min-width: 121px;
+  text-align: left;
+}

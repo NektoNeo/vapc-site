@@ -1,0 +1,96 @@
+{
+  "task": "Настроить CORS на Node.js сервере Express, исправить синтаксическую ошибку в файле index.js и перезапустить сервер через PM2",
+  "context": {
+    "project": "VAPC Site - React фронтенд с Node.js бэкендом на Beget VPS",
+    "server": {
+      "host": "45.141.76.200",
+      "user": "root",
+      "ssh_access": "Настроен парольный доступ, пароль: R9AuQIMM&gt&",
+      "server_path": "/var/www/server",
+      "main_file": "/var/www/server/index.js",
+      "port": 8080,
+      "process_manager": "PM2",
+      "process_name": "vapc"
+    },
+    "current_status": {
+      "cors_package": "Установлен (npm install cors выполнен)",
+      "server_status": "Ошибка запуска из-за синтаксической ошибки в строке 3",
+      "file_state": "Файл index.js поврежден - строка 3 содержит некорректный синтаксис"
+    },
+    "error_details": {
+      "file": "/var/www/server/index.js",
+      "line": 3,
+      "current_content": "const cors = require(\" cors);",
+      "expected_content": "const cors = require(\"cors\");",
+      "error_message": "SyntaxError: Invalid or unexpected token",
+      "error_location": "const cors = require(\" cors);\n                     ^^^^^^^^"
+    },
+    "what_needs_to_be_done": [
+      "1. Исправить строку 3 в /var/www/server/index.js - заменить поврежденную строку на правильную",
+      "2. Добавить конфигурацию CORS после строки 'const app = express();'",
+      "3. Проверить синтаксис файла",
+      "4. Перезапустить сервер через PM2",
+      "5. Проверить работу CORS через curl запрос"
+    ],
+    "cors_configuration": {
+      "allowed_origins": [
+        "https://vasinayw.beget.app",
+        "https://va-pc.ru",
+        "http://localhost:3000",
+        "http://127.0.0.1:3000"
+      ],
+      "credentials": true,
+      "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+      "allowed_headers": ["Content-Type", "Authorization", "X-Requested-With"],
+      "preflight_handling": "app.options('*', cors());"
+    },
+    "previous_attempts": {
+      "issue": "Проблемы с экранированием символов при работе через SSH из PowerShell на Windows",
+      "failed_approaches": [
+        "sed команды с различными вариантами экранирования",
+        "awk команды с многоуровневым экранированием",
+        "Python скрипты через SSH",
+        "Heredoc через SSH"
+      ],
+      "recommendation": "Использовать простые команды sed/awk напрямую на сервере или создать временный скрипт на сервере"
+    }
+  },
+  "requirements": {
+    "must_do": [
+      "Подключиться к серверу по SSH (root@45.141.76.200)",
+      "Исправить строку 3 в /var/www/server/index.js",
+      "Добавить полную конфигурацию CORS после 'const app = express();'",
+      "Проверить синтаксис файла перед перезапуском",
+      "Перезапустить PM2 процесс 'vapc'",
+      "Проверить работу CORS через curl запрос",
+      "Убедиться что сервер запущен и работает"
+    ],
+    "cors_code_to_add": "После строки 'const app = express();' добавить:\n\n// ============================================\n// CORS НАСТРОЙКА\n// ============================================\napp.use(cors({\n  origin: [\n    'https://vasinayw.beget.app',\n    'https://va-pc.ru',\n    'http://localhost:3000',\n    'http://127.0.0.1:3000'\n  ],\n  credentials: true,\n  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],\n  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']\n}));\n\n// Обработка preflight запросов\napp.options('*', cors());\n"
+  },
+  "file_structure": {
+    "index_js_location": "/var/www/server/index.js",
+    "current_first_lines": [
+      "const express = require('express');",
+      "const db = require('./db')",
+      "const cors = require(\" cors);  // <-- ПОВРЕЖДЕНА, нужно исправить",
+      "const bodyParser = require('body-parser');",
+      "...",
+      "const app = express();  // <-- После этой строки добавить CORS конфигурацию"
+    ]
+  },
+  "verification_steps": [
+    "1. Проверить синтаксис: node -c /var/www/server/index.js",
+    "2. Проверить статус PM2: pm2 status",
+    "3. Перезапустить: pm2 restart vapc",
+    "4. Проверить логи: pm2 logs vapc --lines 10",
+    "5. Проверить CORS: curl -I -X OPTIONS http://localhost:8080/getProducts/ -H 'Origin: http://localhost:3000' -H 'Access-Control-Request-Method: GET'"
+  ],
+  "expected_result": {
+    "syntax_check": "✅ Синтаксис корректен!",
+    "pm2_status": "online",
+    "cors_headers": "Должны присутствовать заголовки Access-Control-Allow-Origin, Access-Control-Allow-Credentials, Access-Control-Allow-Methods",
+    "server_response": "Сервер должен отвечать на запросы без ошибок"
+  },
+  "instructions": "Выполни задачу ПОЛНОСТЬЮ: подключись к серверу по SSH, исправь файл, добавь CORS конфигурацию, проверь синтаксис, перезапусти сервер и убедись что всё работает. Используй простые команды sed/awk или создай временный скрипт на сервере для избежания проблем с экранированием."
+}
+

@@ -1,0 +1,107 @@
+.button, .buttonPink {
+  display: inline-block;
+  position: relative;
+  border: none;
+  background: transparent;
+  padding: 15px 30px;
+  transition: all 0.2s;
+  cursor: pointer;
+
+  span {
+    position: relative;
+    display: inline-block;
+    z-index: 3;
+    font-family: "RS";
+    font-style: normal;
+    font-weight: 800;
+    font-size: 16.9704px;
+    line-height: 17px;
+    /* identical to box height */
+
+    text-align: center;
+    text-transform: uppercase;
+
+    color: #ffffff;
+
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+
+  &:hover {
+    &::before {
+      border: 3.05px solid rgba(255, 255, 255, 0.21);
+      // border-radius: 21px;
+      background: linear-gradient(167.1deg, rgba(176, 149, 255, 1) 1.06%, rgba(176, 149, 255, 0.92) 92.98%);
+      transition: background 0.2s linear, border 0.2s linear;
+    }
+    &::after {
+      transition: background 0.2s linear;
+      background: linear-gradient(
+          167.1deg,
+          rgba(124, 83, 255, 0.8) 1.06%,
+          rgba(194, 122, 255, 0.8) 92.98%
+        ),
+        linear-gradient(
+          0deg,
+          rgba(255, 255, 255, 0.21),
+          rgba(255, 255, 255, 0.21)
+        );
+    }
+  }
+}
+
+.buttonPink::after {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: 2;
+  left: 0px;
+  top: 0px;
+  width: calc(100% - 4px);
+  height: calc(100% - 4px);
+  border-radius: 26px;
+  background: linear-gradient(167.1deg, rgba(124, 83, 255, 0.8) 1.06%, rgba(194, 122, 255, 0.8) 92.98%);
+  border: 3.5px solid rgba(255, 255, 255, 0.21);
+}
+
+.button::before {
+  transition: background 0.2s linear, color 0.2s linear;
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  background: linear-gradient(
+    167.1deg,
+    rgba(176, 149, 255, 0) 1.06%,
+    rgba(176, 149, 255, 0.92) 92.98%
+  );
+}
+
+/* Border */
+.button::after {
+  transition: background 0.2s linear, color 0.2s linear;
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: 2;
+  left: 2px;
+  top: 2px;
+  width: calc(100% - 4px);
+  height: calc(100% - 4px);
+  border-radius: 15px;
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(74, 74, 74, 1) 100%
+  );
+}
+
+@media screen and (max-width: 768px) {
+  .button, .buttonPink span {
+    font-size: 14px;
+  }
+}

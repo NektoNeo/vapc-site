@@ -1,0 +1,21 @@
+.giftItem {
+  display: flex;
+  align-items: center;
+  background: #0a0b0d;
+  border: 1px solid #8655FF;
+  padding: 14px 11px;
+  border-radius: 15px;
+  max-height: 42px;
+  margin-bottom: 10px;
+}
+
+.giftIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.giftText {
+  margin-left: 6px;
+  font-weight: 800;
+  font-size: 12px;
+}

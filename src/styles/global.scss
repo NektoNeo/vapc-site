@@ -1,0 +1,27 @@
+@font-face {
+  font-weight: 250;
+  font-family: RS;
+  src: url("../fonts/RockStar/RS-extralight.otf");
+}
+
+@font-face {
+  font-weight: 400;
+  font-family: RS;
+  src: url("../fonts/RockStar/RS-regular.otf");
+}
+
+@font-face {
+  font-weight: 600;
+  font-family: RS;
+  src: url("../fonts/RockStar/RS-semibold.otf");
+}
+
+@font-face {
+  font-weight: 800;
+  font-family: RS;
+  src: url("../fonts/RockStar/RS-extrabold.otf");
+}
+
+.grecaptcha-badge { 
+  visibility: hidden;
+}

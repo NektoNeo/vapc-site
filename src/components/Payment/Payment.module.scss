@@ -1,0 +1,239 @@
+.payment {
+  display: flex;
+}
+
+.about {
+  overflow: hidden;
+  display: flex;
+  // justify-content: center;
+  padding-top: 110px;
+  align-items: center;
+  flex-direction: column;
+  width: 580px;
+  min-width: 580px;
+  height: 380px;
+  box-shadow: 0px 58.1116px 45.6591px -25.5968px rgba(29, 32, 33, 0.64);
+  backdrop-filter: blur(21.5px);
+  position: relative;
+  /* Note: backdrop-filter has minimal browser support */
+
+  border-radius: 16px;
+
+  &::before {
+    transition: all 0.2s;
+    content: "";
+    display: block;
+    position: absolute;
+    z-index: -1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 16px;
+    background: linear-gradient(
+      170deg,
+      rgba(176, 149, 255, 0) 0.06%,
+      rgba(176, 149, 255, 0.53) 92.98%
+    );
+  }
+  &::after {
+    transition: all 0.2s;
+    content: "";
+    display: block;
+    position: absolute;
+    z-index: -1;
+    left: 2px;
+    top: 2px;
+    width: calc(100% - 4px);
+    height: calc(100% - 4px);
+    border-radius: 15px;
+    background: #090808;
+  }
+}
+
+.aboutLogo {
+  z-index: 9;
+}
+
+.aboutLine {
+  margin-top: 78px;
+  margin-bottom: 24px;
+  width: 526px;
+  padding: 0 25px;
+  height: 1px;
+  background-color: #ffffff;
+  z-index: 9;
+}
+
+.aboutOptions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "RS";
+  font-style: normal;
+  font-size: 18px;
+  line-height: 29px;
+  /* identical to box height, or 163% */
+
+  text-align: center;
+
+  color: #ffffff;
+  z-index: 9;
+}
+
+.aboutOptionsItem {
+  margin-right: 28px;
+  font-family: RS;
+  font-weight: 300;
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.steps {
+  margin-left: 120px;
+  position: relative;
+}
+
+.stepsTitle {
+  font-family: "RS";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 45.08px;
+  line-height: 46px;
+  /* identical to box height */
+
+  text-transform: uppercase;
+
+  color: #ffffff;
+}
+
+.stepsList {
+  margin-top: 55px;
+}
+
+.stepsListItem {
+  font-family: "RS";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 17.64px;
+  line-height: 25px;
+  margin-left: 50px;
+  margin-bottom: 36px;
+  /* or 144% */
+
+  color: #ffffff;
+  counter-increment: counter;
+
+  &::before {
+    position: absolute;
+    left: 0;
+    content: counter(counter) ".";
+    font-family: "RS";
+    font-style: normal;
+    font-weight: 800;
+    font-size: 35.28px;
+    line-height: 35px;
+    text-align: center;
+
+    color: #ffffff;
+    margin-top: -3px;
+  }
+}
+
+@media screen and (max-width: 1230px) {
+  .payment {
+    flex-wrap: wrap-reverse;
+  }
+
+  .about {
+    margin-left: 120px;
+    margin-top: 15px;
+  }
+  .stepsTitle {
+    display: block;
+    text-align: center;
+  }
+}
+
+.aboutBigEl,
+.aboutSmallEl {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  width: calc(100% - 4px);
+  height: calc(100% - 4px);
+  border-radius: 15px;
+}
+
+.aboutBigEl {
+  top: 2px;
+  right: 2px;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.aboutSmallEl {
+  left: -100px;
+  bottom: -50px;
+  border-radius: 354.998px;
+  background: linear-gradient(90deg, #1c1b1f 0%, rgba(28, 27, 31, 0) 100%);
+  box-shadow: 0px -6.094814300537109px 24.379257202148438px -36.568885803222656px
+    rgba(0, 0, 0, 0.25);
+  // backdrop-filter: blur(152.370361328125px);
+  opacity: 0.35;
+}
+
+@media screen and (max-width: 768px) {
+  .steps {
+    margin-left: 0;
+    margin: 60px auto 0;
+  }
+  .stepsListItem {
+    max-width: 450px;
+    position: relative;
+    text-align: center;
+    margin-bottom: 56px;
+    margin-left: 0px;
+    font-size: 14px;
+    font-family: RS;
+    line-height: 17.245px;
+    &::before {
+      left: 50%;
+      transform: translateX(-50%);
+      top: -40px;
+    }
+  }
+  .stepsTitle {
+    display: block;
+    font-size: 26px;
+    font-family: RS;
+    text-align: center;
+  }
+  .about {
+    min-width: 290px;
+    width: 290px;
+    height: 203px;
+    margin: 0 auto;
+    padding: 58px 0 0;
+    svg {
+      width: 190px;
+      height: 50px;
+    }
+  }
+  .aboutLine {
+    margin-top: 40px;
+    margin-bottom: 13px;
+    max-width: 280px;
+  }
+  .aboutOptionsItem {
+    font-size: 9.644px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .stepsListItem {
+    max-width: 230px;
+  }
+}

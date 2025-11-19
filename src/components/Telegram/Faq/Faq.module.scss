@@ -1,0 +1,222 @@
+.faq {
+  margin-top: 20px;
+  p,
+  span,
+  svg {
+    z-index: 3;
+  }
+}
+
+.faqBlock {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.gift,
+.delivery {
+  height: 70px;
+  max-width: 150px;
+}
+
+.question {
+  height: 54px;
+}
+
+.buy {
+  height: 100%;
+}
+
+.gift,
+.delivery,
+.buy,
+.question {
+  position: relative;
+  -webkit-backdrop-filter: blur(21.5px);
+  backdrop-filter: blur(21.5px);
+  box-shadow: 0 58.11161px 45.65912px -25.59678px #1d2021a3;
+  display: flex;
+  flex-direction: column;
+  &::after,
+  &::before {
+    content: "";
+    display: block;
+    left: 0;
+    position: absolute;
+    top: 0;
+    z-index: 2;
+  }
+  &::before {
+    background: linear-gradient(150.1deg, #8655ff 1.06%, #433179 92.98%);
+    border-radius: 16px;
+    height: 100%;
+    transition: background 0.2s linear, color 0.2s linear;
+    width: 100%;
+  }
+  &::after {
+    background: black;
+    border-radius: 15px;
+    content: "";
+    display: block;
+    height: calc(100% - 2px);
+    left: 1px;
+    position: absolute;
+    top: 1px;
+    transition: background 0.2s linear, color 0.2s linear;
+    width: calc(100% - 2px);
+    z-index: 2;
+  }
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 154px;
+}
+
+.right {
+  width: 100%;
+}
+
+.gift {
+  padding: 12px 7px;
+}
+
+.giftTitle {
+  font-weight: 800;
+  font-size: 8px;
+  text-transform: uppercase;
+  margin-bottom: 7px;
+  letter-spacing: 0.65px;
+}
+
+.giftDescription {
+  font-weight: 400;
+  font-size: 6px;
+  color: #fff;
+  margin-bottom: 6px;
+  max-width: 99px;
+}
+
+.giftNotice {
+  font-weight: 800;
+  font-size: 10px;
+  letter-spacing: 0.65px;
+  text-transform: uppercase;
+}
+
+.delivery {
+  padding: 16px 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.deliveryHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.deliveryTitle {
+  text-transform: uppercase;
+  font-weight: 800;
+  font-size: 8px;
+  letter-spacing: 0.65px;
+}
+
+.deliveryIcon {
+  width: 36px;
+  margin-right: 4px;
+}
+
+.deliveryDescription {
+  font-weight: 400;
+  font-size: 6px;
+}
+
+.buyContent {
+  position: relative;
+  padding: 15px 0 0 11px;
+  z-index: 3;
+  overflow: hidden;
+  height: inherit;
+  &::after {
+    content: "";
+    overflow: hidden;
+    width: 106px;
+    height: 139px;
+    z-index: 3;
+    background-image: url("../../../images/telegram/faq/gem.png");
+    // background-size: 146px;
+    background-repeat: no-repeat;
+    position: absolute;
+    right: 1px;
+    bottom: 1px;
+    z-index: 2;
+    border-bottom-right-radius: 15px;
+  }
+}
+
+.buyTitle {
+  font-weight: 800;
+  font-size: 12px;
+  text-transform: uppercase;
+  max-width: 98px;
+}
+
+.buyButton {
+  margin-top: 52px;
+  cursor: pointer;
+  position: relative;
+  z-index: 10;
+}
+
+.question {
+  p,
+  span {
+    z-index: 10;
+    position: relative;
+  }
+}
+
+.questionBlock {
+  padding: 18px 38px;
+  position: relative;
+  overflow: hidden;
+  &::after {
+    width: 39px;
+    height: 58px;
+    z-index: 10;
+    content: "";
+    position: absolute;
+    bottom: 1px;
+    left: 1px;
+    background-image: url('../../../images/telegram/faq/gem2.png');
+    background-repeat: no-repeat;
+  }
+}
+
+.questionTitle {
+  font-weight: 800;
+  font-size: 10px;
+  text-transform: uppercase;
+  margin-bottom: 3px;
+  letter-spacing: 0.75px;
+}
+
+.questionDescription {
+  font-weight: 200;
+  font-size: 9px;
+  text-transform: uppercase;
+}
+
+.questionIcon {
+  position: absolute;
+  right: 14px;
+  width: 10px;
+  height: 10px;
+  bottom: 50%;
+  transform: translateY(50%);
+}

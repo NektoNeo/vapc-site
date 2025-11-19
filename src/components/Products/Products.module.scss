@@ -1,0 +1,58 @@
+.products {
+  margin-top: 56px;
+}
+
+.productsCards {
+  margin-top: 50px;
+  // display: grid;
+  // grid-template-areas: 'p p p';
+  // grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* автоматический перенос на новую строку */
+  // grid-auto-rows: 1fr; /* все строки имеют равную высоту */
+  // grid-gap: 20px; /* расстояние между карточками */
+  display: flex;
+  // justify-content: space-between;
+  // align-items: stretch;
+  // flex-wrap: wrap;
+  column-gap: calc(6rem + 4px);
+  min-height: 600px;
+  flex-wrap: wrap;
+}
+
+.productsButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 330px;
+  height: 68px;
+  margin: 28px auto 0;
+  box-shadow: 0px 58.11161px 45.65912px -25.59678px rgba(29, 32, 33, 0.64);
+  -webkit-backdrop-filter: blur(21.5px);
+  backdrop-filter: blur(21.5px);
+  span {
+    font-size: 26px;
+    margin-bottom: 3px;
+    font-weight: 800;
+    line-height: 32px;
+    color: #ffffff;
+    text-shadow: 0px 4.2659px 4.2659px rgba(0, 0, 0, 0.25);
+  }
+}
+
+@media screen and (max-width: 1130px) {
+  .productsCards {
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .products {
+    margin-top: 15px;
+  }
+  .productsButton {
+    max-height: 47px;
+    width: 290px;
+    span {
+      font-size: 18.571px;
+    }
+  }
+}

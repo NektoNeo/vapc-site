@@ -1,0 +1,209 @@
+.cases {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 64px;
+  // max-width: 1040px;
+  // width: 1040px;
+}
+
+.casesItem {
+  position: relative;
+  display: flex;
+  width: 506px;
+  height: 261px;
+  min-height: 261px;
+  background: linear-gradient(
+    180deg,
+    rgba(22, 22, 22, 0.322) 0%,
+    rgba(0, 0, 0, 0.441) 100%
+  );
+  box-shadow: 0px 58.1116px 45.6591px -25.5968px rgba(29, 32, 33, 0.64);
+  // backdrop-filter: blur(86px);
+  /* Note: backdrop-filter has minimal browser support */
+
+  border-radius: 15px;
+  margin-bottom: 13px;
+  padding: 18px 20px 22px 33px;
+  &:nth-child(n + 1) {
+    margin-right: 20px;
+  }
+  &::before {
+    transition: all 0.2s;
+    content: "";
+    display: block;
+    position: absolute;
+    z-index: -1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+    background: linear-gradient(
+      0deg,
+      rgba(176, 149, 255, 0) 0.06%,
+      rgba(22, 22, 22, 1) 92.98%
+    );
+  }
+  &::after {
+    transition: all 0.2s;
+    content: "";
+    display: block;
+    position: absolute;
+    z-index: -1;
+    left: 2px;
+    top: 2px;
+    width: calc(100% - 4px);
+    height: calc(100% - 4px);
+    border-radius: 15px;
+    background: rgba(0, 0, 0, 0.43);
+  }
+}
+
+.casesNameMobile {
+  display: none;
+}
+
+.casesImage {
+  border-radius: 8px;
+}
+
+.casesLeft {
+  max-width: 193px;
+  margin-top: 48px;
+}
+
+.casesRight {
+  margin-left: 23px;
+  position: relative;
+}
+
+.casesAdvant {
+  margin-top: 24px;
+  font-family: "RS";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 156.79%;
+  /* identical to box height, or 19px */
+
+  text-align: center;
+
+  color: #ffffff;
+}
+
+.casesName {
+  font-family: "RS";
+  font-style: normal;
+  font-weight: 800;
+  font-size: 20.1786px;
+  line-height: 156.79%;
+  /* identical to box height, or 32px */
+
+  color: #ffffff;
+}
+
+.casesText {
+  margin-top: 10px;
+  max-width: 239px;
+  font-family: "RS";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 12.6116px;
+  line-height: 156.79%;
+  /* or 20px */
+
+  color: #ffffff;
+}
+
+.casesStars {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  max-width: 128px;
+  width: 128px;
+}
+
+.casesButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 330px;
+  height: 68px;
+  margin: 28px auto 0;
+  box-shadow: 0px 58.111610412597656px 45.659122467041016px -25.596782684326172px
+    rgba(29, 32, 33, 0.64);
+  backdrop-filter: blur(21.5px);
+  span {
+    font-size: 26px;
+    margin-bottom: 3px;
+    font-weight: 800;
+    line-height: 32px;
+    color: #ffffff;
+    text-shadow: 0px 4.2659px 4.2659px rgba(0, 0, 0, 0.25);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .cases {
+    margin-top: 35px;
+  }
+  .casesItem:nth-child(n + 1) {
+    margin-right: 0px;
+  }
+}
+
+@media screen and (max-width: 534px) {
+  .casesItem {
+    text-align: center;
+    flex-wrap: wrap;
+    height: 433px;
+    // gap: 1rem;
+    padding: 18px 20px 18px 20px;
+  }
+  .casesLeft {
+    width: 100%;
+    margin: 0 auto;
+    img {
+      width: 100%;
+    }
+  }
+  .casesRight {
+    margin: 0 auto;
+    // p {
+    //   text-align: center;
+    //   display: block;
+    // }
+  }
+  .casesStars {
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -5px;
+  }
+  .casesName {
+    display: none;
+  }
+  .casesNameMobile {
+    display: block;
+    width: 100%;
+    font-size: 20.179px;
+    line-height: 156.792%;
+  }
+  .casesAdvant {
+    font-weight: 800;
+    margin-top: 14px;
+  }
+  .casesText {
+    margin-top: 0px;
+  }
+  .casesButton {
+    max-height: 47px;
+    width: 290px;
+  }
+  .casesButton span {
+    font-size: 18.571px;
+  }
+}

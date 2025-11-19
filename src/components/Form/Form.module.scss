@@ -1,0 +1,103 @@
+.form {
+  margin-top: 157px;
+}
+
+.formBlock {
+  display: flex;
+  justify-content: center;
+  margin-top: 28px;
+}
+
+.formInput {
+  width: 350px;
+  padding: 24px 19px;
+  border: 1.05px solid #FFFFFF;
+  border-radius: 10px;
+  background: transparent;
+  font-family: 'RS';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18.9677px;
+  line-height: 27px;
+  /* identical to box height, or 144% */
+  margin-right: 21px;
+  outline: none;
+
+  input {
+    background: transparent;
+    border: none;
+    font-family: 'RS';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18.9677px;
+    line-height: 27px;
+    color: #FFFFFF;
+    outline: none;
+  }
+
+
+  color: #FFFFFF;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.formInputError {
+  border-color: red;
+}
+
+.formButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 70px auto 0;
+  width: 392px;
+  height: 66px;
+  span {
+    font-size: 26px;
+    margin-bottom: 3px;
+    font-weight: 800;
+    line-height: 32px;
+    color: #ffffff;
+    text-shadow: 0px 4.2659px 4.2659px rgba(0, 0, 0, 0.25);
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  .formBlock {
+    max-width: 600px;
+    margin: 30px auto 0;
+    flex-wrap: wrap;
+  }
+  .formInput {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+}
+
+@media  screen and (max-width: 768px){
+  .form {
+    margin-top: 60px;
+  }
+  .formTypography {
+    font-size: 26px;
+  }
+  .formButton {
+    width: 290px;
+    max-height: 46px;
+    margin-top: 0px;
+    span {
+      font-size: 18px;
+      line-height: 117.2%;
+    }
+  }
+  .formInput {
+    max-height: 52px;
+    font-size: 16px;
+    input {
+      font-size: 16px;
+    }
+  }
+}

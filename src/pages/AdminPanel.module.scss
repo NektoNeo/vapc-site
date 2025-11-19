@@ -1,0 +1,72 @@
+.grid {
+  background-color: white;
+  margin: 100px 50px;
+}
+
+.buttonSection {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.button {
+  margin-right: 20px;
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.deleteIcon {
+  color: red;
+  cursor: pointer;
+}
+
+.saveIcon {
+  color: green;
+  cursor: pointer;
+}
+
+.modal {
+  height: 100%;
+  width: 100%;
+}
+
+.modalCtn {
+  position: relative;
+  width: 500px;
+  padding: 50px;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  margin-top: 50px;
+  background: black;
+  overflow: scroll-y;
+}
+
+.modalInput {
+  margin-bottom: 20px;
+}
+
+.modalInputFile {
+  background-color: #008CBA;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  font-family: 'RS';
+  margin-bottom: 15px;
+}
+
+.modalPreview {
+  background-color: white;
+  margin-bottom: 15px;
+}
+
+.modalClose {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  color: gray;
+  cursor: pointer;
+}

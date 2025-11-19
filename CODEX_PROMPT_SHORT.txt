@@ -1,0 +1,27 @@
+ЗАДАЧА: Исправить синтаксическую ошибку в /var/www/server/index.js (строка 3), добавить CORS конфигурацию и перезапустить сервер через PM2.
+
+СЕРВЕР: SSH root@45.141.76.200 (пароль: R9AuQIMM&gt&)
+
+ПРОБЛЕМА: 
+Строка 3 повреждена: `const cors = require(" cors);` 
+Нужно: `const cors = require("cors");`
+
+ДЕЙСТВИЯ:
+1. Подключиться по SSH
+2. Исправить строку 3: sed -i "3s/.*/const cors = require('cors');/" /var/www/server/index.js
+3. Добавить CORS после `const app = express();`:
+
+app.use(cors({
+  origin: ['https://vasinayw.beget.app', 'https://va-pc.ru', 'http://localhost:3000', 'http://127.0.0.1:3000'],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
+}));
+app.options('*', cors());
+
+4. Проверить: node -c /var/www/server/index.js
+5. Перезапустить: pm2 restart vapc
+6. Проверить CORS: curl -I -X OPTIONS http://localhost:8080/getProducts/ -H 'Origin: http://localhost:3000'
+
+Выполни все шаги полностью.
+

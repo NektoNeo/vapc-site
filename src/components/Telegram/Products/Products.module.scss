@@ -1,0 +1,37 @@
+.products {
+  margin-top: 24px;
+}
+
+.productsList {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.productsHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 26px;
+}
+
+.productsTitle {
+  font-weight: 800;
+  font-size: 22px;
+}
+
+.productsActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.productsSort {
+  width: 16px;
+  height: 16px;
+}
+.productsSearch {
+  width: 18px;
+  height: 18px;
+}
