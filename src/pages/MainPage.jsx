@@ -17,9 +17,8 @@ import light from "../images/backgrounds/light.svg";
 import miniCross from "../images/backgrounds/miniCross.svg";
 import { motion } from "framer-motion";
 import { Header } from "../components/Header";
-import { Animate, AnimateKeyframes, AnimateGroup } from "react-simple-animate";
+import { Animate } from "react-simple-animate";
 import { YMInitializer } from "react-yandex-metrika";
-import Button from "../components/Button";
 
 const MainPage = () => {
   const windowSize = useRef([window.innerWidth, window.innerHeight]);
@@ -29,11 +28,18 @@ const MainPage = () => {
   useEffect(() => {
     updateIsMobile(windowSize.current[0] < 1024);
     
+    let ticking = false;
     const handleScroll = () => {
-      setShowScrollTop(window.scrollY > 300);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setShowScrollTop(window.scrollY > 300);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
     
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.localStorage.removeItem("PC");
@@ -44,7 +50,9 @@ const MainPage = () => {
     try {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch (error) {
-      console.warn('Ошибка при прокрутке наверх:', error);
+      if (process.env.NODE_ENV === 'development') {
+        console.warn('Ошибка плавной прокрутки:', error);
+      }
       window.scrollTo(0, 0);
     }
   };
@@ -69,25 +77,15 @@ const MainPage = () => {
       <YMInitializer
         accounts={[95153753]}
         options={{
-          clickmap: false, // Отключаем clickmap чтобы избежать ошибок с className
+          clickmap: false,
           trackLinks: true,
           accurateTrackBounce: true,
           webvisor: true,
         }}
         version="2"
       />
-      <motion.section
-        variants={defaultBlockAnimation}
-        initial={!isMobile ? "hidden" : "onlyVisible"}
-        whileInView={!isMobile ? "visible" : "onlyVisible"}
-        viewport={{ once: true }}
-        id="main"
-        className={styles.mainBlock}
-      >
-        <div className={styles.container}>
-          <Header />
-        </div>
-      </motion.section>
+      <Header />
+      <section id="main" className={styles.mainAnchor}></section>
       <motion.section
         variants={defaultBlockAnimation}
         initial={!isMobile ? "hidden" : "onlyVisible"}
@@ -110,12 +108,12 @@ const MainPage = () => {
         <img
           className={styles.servicesLightRight}
           src={light}
-          alt="Правое свечение"
+          alt="Вспышка подсветки"
         />
         <img
           className={styles.servicesLightLeft}
           src={light}
-          alt="Левое свечение"
+          alt="Вспышка подсветки"
         />
         <div className={styles.container}>
           <Typography
@@ -136,11 +134,11 @@ const MainPage = () => {
       >
         <Animate play start={{ opacity: 0 }} end={{ opacity: 1 }}>
           <div className={styles.container}>
-            <Typography
-              className={styles.productsTypography}
-              type="h2"
-              text="ЛУЧШЕЕ РЕШЕНИЕ ДЛЯ ВАС"
-            />
+          <Typography
+            className={styles.productsTypography}
+            type="h2"
+            text="ЛУЧШЕЕ РЕШЕНИЕ ДЛЯ ВАС"
+          />
             <Products />
           </div>
         </Animate>
@@ -168,7 +166,7 @@ const MainPage = () => {
           <img
             className={styles.stepsMiniCross}
             src={miniCross}
-            alt="крестик"
+            alt="Декоративный элемент"
           />
           <Typography
             className={styles.stepsTypography}
@@ -291,33 +289,6 @@ const MainPage = () => {
           onClick={scrollToTop}
           className={styles.scrollTop}
           aria-label="Наверх"
-          style={{
-            position: 'fixed',
-            bottom: '30px',
-            right: '30px',
-            width: '50px',
-            height: '50px',
-            borderRadius: '50%',
-            background: 'linear-gradient(325deg, rgba(194, 122, 255, 1) 0%, rgba(124, 83, 255, 1) 55%, rgba(194, 122, 255, 1) 90%)',
-            border: 'none',
-            color: '#fff',
-            fontSize: '24px',
-            cursor: 'pointer',
-            zIndex: 100,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            boxShadow: '0 4px 20px rgba(124, 83, 255, 0.4)',
-            transition: 'all 0.3s ease'
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.transform = 'translateY(-5px)';
-            e.currentTarget.style.boxShadow = '0 6px 25px rgba(124, 83, 255, 0.6)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.transform = 'translateY(0)';
-            e.currentTarget.style.boxShadow = '0 4px 20px rgba(124, 83, 255, 0.4)';
-          }}
         >
           ↑
         </motion.button>

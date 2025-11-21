@@ -1,23 +1,28 @@
 .h2 {
-  font-family: 'RS';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 46px;
-  line-height: 47px;
+  font-family: "RS";
+  font-weight: 800;
+  font-size: clamp(28px, 4vw, 42px);
+  line-height: 1.15;
   text-align: center;
-  color: #FFFFFF;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); // Улучшаем читаемость
-  letter-spacing: 0.5px; // Улучшаем читаемость крупного текста
+  color: #ffffff;
+  text-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+  letter-spacing: 0.4px;
 }
 
 .h3 {
-  font-family: 'RS';
-  font-style: normal;
-  font-weight: 300;
-  font-size: 36px;
-  line-height: 37px;
+  font-family: "RS";
+  font-weight: 700;
+  font-size: clamp(24px, 3.2vw, 32px);
+  line-height: 1.2;
   text-align: center;
-  color: #FFFFFF;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3); // Улучшаем читаемость
+  color: #ffffff;
+  text-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
   letter-spacing: 0.3px;
+}
+
+.p {
+  font-family: "Space Grotesk", "RS", sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-secondary);
 }

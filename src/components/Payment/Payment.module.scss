@@ -1,174 +1,116 @@
 .payment {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: clamp(28px, 5vw, 42px);
+  align-items: center;
 }
 
 .about {
+  position: relative;
   overflow: hidden;
   display: flex;
-  padding-top: 110px;
+  padding: clamp(48px, 6vw, 70px) clamp(24px, 4vw, 36px);
   align-items: center;
   flex-direction: column;
-  width: 580px;
-  min-width: 580px;
-  height: 380px;
-  position: relative;
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  background: linear-gradient(
-    135deg,
-    rgba(176, 149, 255, 0.08) 0%,
-    rgba(124, 83, 255, 0.05) 50%,
-    rgba(22, 22, 22, 0.4) 100%
-  );
-  box-shadow: 
-    0 8px 32px 0 rgba(124, 83, 255, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  transition: all 0.3s ease;
+  min-height: 340px;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(16px);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
 
-  &:hover {
-    border-color: rgba(176, 149, 255, 0.3);
-    box-shadow: 
-      0 12px 40px 0 rgba(124, 83, 255, 0.25),
-      inset 0 1px 0 rgba(255, 255, 255, 0.15);
-  }
-
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-radius: 16px;
-    padding: 1px;
-    background: linear-gradient(
-      135deg,
-      rgba(176, 149, 255, 0.3) 0%,
-      rgba(124, 83, 255, 0.2) 50%,
-      rgba(194, 122, 255, 0.25) 100%
-    );
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    z-index: -1;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-
-  &:hover::before {
-    opacity: 1;
-  }
-
-  &::after {
-    display: none;
-  }
+.about:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: var(--shadow-strong);
 }
 
 .aboutLogo {
-  z-index: 9;
+  z-index: 2;
 }
 
 .aboutLine {
-  margin-top: 78px;
-  margin-bottom: 24px;
-  width: 526px;
-  padding: 0 25px;
+  margin-top: 62px;
+  margin-bottom: 22px;
+  width: 100%;
+  max-width: 520px;
   height: 1px;
-  background-color: #ffffff;
-  z-index: 9;
+  background: linear-gradient(90deg, rgba(195, 140, 255, 0.45), rgba(255, 255, 255, 0.55), rgba(195, 140, 255, 0.3));
+  z-index: 2;
 }
 
 .aboutOptions {
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
   font-family: "RS";
-  font-style: normal;
-  font-size: 18px;
-  line-height: 29px;
-  /* identical to box height, or 163% */
-
-  text-align: center;
-
+  font-size: 16px;
+  line-height: 1.4;
   color: #ffffff;
-  z-index: 9;
+  z-index: 2;
 }
 
 .aboutOptionsItem {
-  margin-right: 28px;
-  font-family: RS;
-  font-weight: 300;
-  &:last-child {
-    margin-right: 0;
-  }
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .steps {
-  margin-left: 120px;
   position: relative;
+  padding: clamp(12px, 2vw, 16px) clamp(6px, 2vw, 10px);
 }
 
 .stepsTitle {
   font-family: "RS";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 45.08px;
-  line-height: 46px;
-  /* identical to box height */
-
+  font-weight: 700;
+  font-size: clamp(26px, 4vw, 38px);
   text-transform: uppercase;
-
   color: #ffffff;
 }
 
 .stepsList {
-  margin-top: 55px;
+  margin-top: clamp(22px, 4vw, 32px);
+  display: grid;
+  gap: 16px;
 }
 
 .stepsListItem {
+  position: relative;
+  padding: 16px 16px 16px 56px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text-secondary);
   font-family: "RS";
-  font-style: normal;
-  font-weight: 300;
-  font-size: 17.64px;
-  line-height: 25px;
-  margin-left: 50px;
-  margin-bottom: 36px;
-  /* or 144% */
-
-  color: #ffffff;
+  font-size: 16px;
+  line-height: 1.55;
   counter-increment: counter;
-
-  &::before {
-    position: absolute;
-    left: 0;
-    content: counter(counter) ".";
-    font-family: "RS";
-    font-style: normal;
-    font-weight: 800;
-    font-size: 35.28px;
-    line-height: 35px;
-    text-align: center;
-
-    color: #ffffff;
-    margin-top: -3px;
-  }
 }
 
-@media screen and (max-width: 1230px) {
-  .payment {
-    flex-wrap: wrap-reverse;
-  }
-
-  .about {
-    margin-left: 120px;
-    margin-top: 15px;
-  }
-  .stepsTitle {
-    display: block;
-    text-align: center;
-  }
+.stepsListItem::before {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  content: counter(counter);
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "RS";
+  font-weight: 800;
+  font-size: 16px;
+  color: #ffffff;
+  background: linear-gradient(135deg, rgba(127, 90, 255, 0.9), rgba(195, 140, 255, 0.9));
+  border-radius: 10px;
+  box-shadow: 0 10px 26px rgba(127, 90, 255, 0.35);
 }
 
 .aboutBigEl,
@@ -177,78 +119,35 @@
   position: absolute;
   width: 100%;
   height: 100%;
-  width: calc(100% - 4px);
-  height: calc(100% - 4px);
-  border-radius: 15px;
 }
 
 .aboutBigEl {
-  top: 2px;
-  right: 2px;
+  top: 0;
+  right: 0;
   z-index: 1;
-  overflow: hidden;
+  opacity: 0.6;
 }
 
 .aboutSmallEl {
-  left: -100px;
-  bottom: -50px;
+  left: -120px;
+  bottom: -60px;
   border-radius: 354.998px;
   background: linear-gradient(90deg, #1c1b1f 0%, rgba(28, 27, 31, 0) 100%);
-  box-shadow: 0px -6.094814300537109px 24.379257202148438px -36.568885803222656px
-    rgba(0, 0, 0, 0.25);
-  // backdrop-filter: blur(152.370361328125px);
-  opacity: 0.35;
+  opacity: 0.25;
 }
 
 @media screen and (max-width: 768px) {
-  .steps {
-    margin-left: 0;
-    margin: 60px auto 0;
+  .payment {
+    grid-template-columns: 1fr;
   }
-  .stepsListItem {
-    max-width: 450px;
-    position: relative;
-    text-align: center;
-    margin-bottom: 56px;
-    margin-left: 0px;
-    font-size: 14px;
-    font-family: RS;
-    line-height: 17.245px;
-    &::before {
-      left: 50%;
-      transform: translateX(-50%);
-      top: -40px;
-    }
-  }
-  .stepsTitle {
-    display: block;
-    font-size: 26px;
-    font-family: RS;
-    text-align: center;
-  }
-  .about {
-    min-width: 290px;
-    width: 290px;
-    height: 203px;
-    margin: 0 auto;
-    padding: 58px 0 0;
-    svg {
-      width: 190px;
-      height: 50px;
-    }
-  }
-  .aboutLine {
-    margin-top: 40px;
-    margin-bottom: 13px;
-    max-width: 280px;
-  }
-  .aboutOptionsItem {
-    font-size: 9.644px;
-  }
-}
 
-@media screen and (max-width: 500px) {
+  .about {
+    min-height: 240px;
+    padding: 36px 16px 42px;
+  }
+
   .stepsListItem {
-    max-width: 230px;
+    padding: 14px 14px 14px 52px;
+    font-size: 15px;
   }
 }

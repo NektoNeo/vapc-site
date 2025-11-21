@@ -10,14 +10,14 @@ const Services = () => {
   const services = [
     {
       img: <ServiceIMG1 />,
-      title: "ИНДИВИДУАЛЬАЯ СБОРКА",
+      title: "ИНДИВИДУАЛЬНАЯ СБОРКА",
       text: (
         <div className={styles.serviceDescription}>
           <div className={styles.serviceDescriptionLine}>Высокая мощность или компактность?</div>
-          <div className={styles.serviceDescriptionLine}><span>Соберем ПК лично под вас.</span></div>
-          <div className={styles.serviceDescriptionLine}><span>Никаких “паутин”</span> из проводов.</div>
-          <div className={styles.serviceDescriptionLine}><span>Обновим и настроим</span> BIOS</div>
-          <div className={styles.serviceDescriptionLine}><span>Стресс-тест</span> после сборки – отправим только рабочий ПК.</div>
+          <div className={styles.serviceDescriptionLine}>Соберем ПК лично под вас.</div>
+          <div className={styles.serviceDescriptionLine}>Никаких "паутин" из проводов.</div>
+          <div className={styles.serviceDescriptionLine}><span>Обновим и настроим BIOS</span></div>
+          <div className={styles.serviceDescriptionLine}><span>Стресс-тест после сборки</span> – отправим только рабочий ПК.</div>
         </div>
       ),
     },
@@ -26,26 +26,22 @@ const Services = () => {
       title: "РЕМОНТ",
       text: (
         <div className={styles.serviceDescription}>
-          <div className={styles.serviceDescriptionLine}><span>Найдем</span> неисправность.</div>
-          <div className={styles.serviceDescriptionLine}><span>Обсудим</span> ремонт, стоимость и сроки.</div>
-          <div className={styles.serviceDescriptionLine}><span>Заменим</span> комплектующие и устраним неисправность.</div>
-          <div className={styles.serviceDescriptionLine}><span>Расскажем</span>, как продлить жизнь ПК.</div>
+          <div className={styles.serviceDescriptionLine}>Найдем неисправность.</div>
+          <div className={styles.serviceDescriptionLine}><span>Обсудим ремонт, стоимость и сроки.</span></div>
+          <div className={styles.serviceDescriptionLine}><span>Заменим комплектующие</span> и устраним неисправность.</div>
+          <div className={styles.serviceDescriptionLine}><span>Расскажем, как продлить жизнь ПК.</span></div>
         </div>
       ),
     },
     {
       img: <ServiceIMG3 />,
       title: "АПГРЕЙД",
-//       
-// 
-// 
-// 
       text: (
         <div className={styles.serviceDescription}>
-          <div className={styles.serviceDescriptionLine}><span>Оценим</span> и проанализируем возможность апгрейда.</div>
-          <div className={styles.serviceDescriptionLine}><span>Подберем</span> оптимальные комплектующие под ваш бюджет</div>
-          <div className={styles.serviceDescriptionLine}><span>Установим</span> новые компоненты</div>
-          <div className={styles.serviceDescriptionLine}><span>Проверим</span> работоспособность улучшенного ПК</div>
+          <div className={styles.serviceDescriptionLine}><span>Оценим и проанализируем</span> возможность апгрейда.</div>
+          <div className={styles.serviceDescriptionLine}><span>Подберем оптимальные комплектующие</span> под ваш бюджет</div>
+          <div className={styles.serviceDescriptionLine}><span>Установим новые компоненты</span></div>
+          <div className={styles.serviceDescriptionLine}><span>Проверим работоспособность</span> улучшенного ПК</div>
         </div>
       ),
     },
@@ -54,9 +50,9 @@ const Services = () => {
       title: "ЛИЧНАЯ КОНСУЛЬТАЦИЯ",
       text: (
         <div className={styles.serviceDescription}>
-          <div className={styles.serviceDescriptionLine}>Игры, а может монтаж? – <span>Учтем предпочтения</span> и предложим варианты.</div>
-          <div className={styles.serviceDescriptionLine}><span>Обсудим</span> цену, мощность, комплектующие – все.</div>
-          <div className={styles.serviceDescriptionLine}>Расположение ПК, периферия – <span>учтем все</span>.</div>
+          <div className={styles.serviceDescriptionLine}>Игры, а может монтаж? – Учтем предпочтения и предложим варианты.</div>
+          <div className={styles.serviceDescriptionLine}><span>Обсудим цену, мощность, комплектующие</span> – все.</div>
+          <div className={styles.serviceDescriptionLine}><span>Расположение ПК, периферия</span> – учтем все.</div>
         </div>
       ),
     },
@@ -66,7 +62,7 @@ const Services = () => {
       <div className={styles.services}>
         {services.map((item) => (
           <div key={item.title} className={styles.serviceItem}>
-            <img className={styles.serviceImg} src={item.img.type} alt="" />
+            <img className={styles.serviceImg} src={item.img.type} alt={item.title} />
             <span className={styles.serviceTitle}>{item.title}</span>
             {item.text}
           </div>
@@ -78,7 +74,7 @@ const Services = () => {
           onClick={() => goToLink("#form", "_self")}
           className={styles.serviceButton}
         >
-          Заказать свой идеальный ПК
+          Подобрать конфигурацию
         </Button>
       </div>
     </>

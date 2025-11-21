@@ -76,30 +76,40 @@ const Live = () => {
       breakpoint: 2200,
       settings: {
         slidesToShow: 6,
+        infinite: true,
+        centerMode: false,
       },
     },
     {
       breakpoint: 1500,
       settings: {
         slidesToShow: 4,
+        infinite: true,
+        centerMode: false,
       },
     },
     {
       breakpoint: 1350,
       settings: {
         slidesToShow: 3,
+        infinite: true,
+        centerMode: false,
       },
     },
     {
       breakpoint: 800,
       settings: {
         slidesToShow: 2,
+        infinite: true,
+        centerMode: false,
       },
     },
     {
       breakpoint: 500,
       settings: {
         slidesToShow: 1,
+        infinite: true,
+        centerMode: false,
       },
     },
   ];
@@ -107,20 +117,25 @@ const Live = () => {
     <div className={styles.live}>
       <Slider
         responsive={responsive}
-        focusOnSelect
-        autoplay
+        infinite={true}
+        autoplay={true}
+        autoplaySpeed={3000}
+        speed={800}
         slidesToScroll={1}
-        rows={1}
-        swipeToSlide
-        swipeThreshold={50}
         slidesToShow={5}
-        centerMode
+        centerMode={false}
+        centerPadding="0px"
         arrows={false}
-        easing
+        dots={false}
+        swipeToSlide={true}
+        swipeThreshold={50}
+        variableWidth={false}
+        adaptiveHeight={false}
+        cssEase="ease-in-out"
       >
         {lives.map((item, index) => (
-          <a key={index} target="_blank" href={item.link} className={styles.liveItem}>
-            <img src={item.img} alt="live" />
+          <a key={index} target="_blank" rel="noopener noreferrer" href={item.link} className={styles.liveItem}>
+            <img src={item.img} alt="live" loading="lazy" />
           </a>
         ))}
       </Slider>

@@ -1,62 +1,172 @@
 .live {
-  margin-top: 53px;
+  margin-top: 40px;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  padding: 0;
+  overflow: visible !important;
+
+  :global(.slick-list) {
+    overflow: visible !important;
+    margin: 0;
+    padding: 0 !important;
+  }
+
+  :global(.slick-track) {
+    display: flex;
+    align-items: stretch;
+    will-change: transform;
+  }
+
+  :global(.slick-slide) {
+    height: auto;
+    padding: 0 !important;
+    margin: 0 clamp(12px, 2vw, 20px) !important;
+    
+    > div {
+      height: 100%;
+    }
+  }
 }
 
 .liveItem {
-  // position: absolute;
-  max-width: 90%;
-  height: 440px;
+  width: 100% !important;
+  min-width: 280px;
   display: flex !important;
-  padding: 8px;
-  // left: 708px;
-  // top: 6732px;
-
-  box-shadow: 0px 58.1116px 45.6591px -25.5968px rgba(29, 32, 33, 0.64);
-  backdrop-filter: blur(21.5px);
-  /* Note: backdrop-filter has minimal browser support */
-  border: 1px solid rgba(255, 255, 255, 0.92);
-
-  // border-image-source: linear-gradient(167.1deg, rgba(255, 255, 255, 0.92) 1.06%, rgba(255, 255, 255, 0.92) 92.98%);
-
-  border-radius: 34px;
-  // transform: matrix(-1, 0, 0, 1, 0, 0);
+  flex-direction: column;
+  padding: clamp(8px, 1.2vw, 12px);
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.06) 0%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  box-shadow: 
+    0 24px 60px rgba(0, 0, 0, 0.32),
+    0 8px 24px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(14px);
   outline: none;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    padding: 1px;
+    background: linear-gradient(
+      135deg,
+      rgba(195, 140, 255, 0.3),
+      rgba(109, 220, 255, 0.2),
+      rgba(127, 90, 255, 0.3)
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: 24px;
+    background: radial-gradient(
+      circle at 50% 0%,
+      rgba(195, 140, 255, 0.2) 0%,
+      rgba(109, 220, 255, 0.15) 50%,
+      transparent 100%
+    );
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  &:hover {
+    transform: translateY(-8px) scale(1.02);
+    border-color: rgba(255, 255, 255, 0.25);
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.12) 0%,
+      rgba(255, 255, 255, 0.06) 100%
+    );
+    box-shadow: 
+      0 32px 80px rgba(0, 0, 0, 0.45),
+      0 16px 40px rgba(127, 90, 255, 0.3),
+      0 8px 24px rgba(195, 140, 255, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+
+    &::before {
+      opacity: 1;
+    }
+
+    &::after {
+      opacity: 1;
+    }
+
+    img {
+      transform: scale(1.05);
+      filter: brightness(1.1) contrast(1.05);
+    }
+  }
 
   img {
     width: 100%;
-    height: 100%;
-    object-fit: fill;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 34px;
+    aspect-ratio: 226 / 393;
+    object-fit: cover;
+    object-position: center;
+    background: radial-gradient(circle, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0) 60%);
+    border-radius: 20px;
+    display: block;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 0;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                filter 0.4s ease;
   }
 }
 
 @media screen and (min-width: 2200px) {
   .liveItem {
-    height: 600px;
+    min-width: 320px;
   }
 }
 
 @media screen and (max-width: 1200px) {
   .liveItem {
-    height: 400px;
+    min-width: 260px;
   }
 }
 
 @media screen and (max-width: 950px) {
   .liveItem {
-    // height: 200px;
+    min-width: 240px;
+    
     img {
-      object-fit: contain;
+      object-fit: cover;
     }
   }
 }
 
 @media screen and (max-width: 500px) {
   .liveItem {
-    max-width: 95%;
-    height: 335px;
+    min-width: 200px;
+  }
+  
+  .live {
+    :global(.slick-slide) {
+      margin: 0 clamp(10px, 2.5vw, 14px) !important;
+    }
   }
 }

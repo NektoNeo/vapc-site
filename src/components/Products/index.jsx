@@ -1,125 +1,163 @@
 import ProductsFilters from "../ProductsFilters";
 import styles from "./Products.module.scss";
-import { useState, useCallback, lazy, Suspense, useEffect } from "react";
+import { useState, useCallback, useEffect, useMemo } from "react";
 import Button from "../Button";
-import { Animate } from "react-simple-animate";
+import ProductsCard from "../ProductsCard";
 import { products as staticProducts } from "../../const/const";
 import { apiUrl } from "../../config/api";
-const ProductsCard = lazy(() => import("../ProductsCard"));
 
 const Products = () => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [visibleProducts, setVisibleProducts] = useState(6);
-  const [isShowProducts, setShowProducts] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
+  const [currentFilter, setCurrentFilter] = useState({
+    filterFrom: "Все",
+    filterTo: "Все",
+  });
 
-  const showMoreProducts = () => {
-    setVisibleProducts(visibleProducts + 6);
-  };
+  const showMoreProducts = useCallback(() => {
+    setVisibleProducts((prev) => prev + 6);
+  }, []);
 
   useEffect(() => {
     getProductsData();
-  }, [])
+  }, []);
 
+  // Сбрасываем видимые продукты при изменении фильтра
   useEffect(() => {
-    if (!isShowProducts) {
-      return setShowProducts(true);
-    }
-  }, [isShowProducts])
+    setVisibleProducts(6);
+  }, [currentFilter]);
 
-  const selectedFilter = useCallback((price) => {
-    setShowProducts(false)
-    if (price.filterFrom === "Все" && price.filterTo === "Все") {
-      return setFilteredProducts([...products]);
-    }
+  const selectedFilter = useCallback(
+    (price) => {
+      setCurrentFilter(price);
+      
+      if (price.filterFrom === "Все" && price.filterTo === "Все") {
+        setFilteredProducts([...products]);
+        return;
+      }
 
-    const formattedfilterFrom = parseInt(price.filterFrom?.toString().replace(/\./g, '') || '0');
-    const formattedfilterTo = parseInt(price.filterTo?.toString().replace(/\./g, '') || '999999999');
-    return setFilteredProducts(
-      products.filter((item) => {
-        const itemPrice = parseInt((item.price || '0').toString().replace(/\./g, ''));
-        return itemPrice >= formattedfilterFrom && itemPrice <= formattedfilterTo;
-      })
-    );
-  }, [products]);
+      const formattedfilterFrom = parseInt(
+        price.filterFrom?.toString().replace(/\./g, "") || "0"
+      );
+      const formattedfilterTo = parseInt(
+        price.filterTo?.toString().replace(/\./g, "") || "999999999"
+      );
+      
+      const filtered = products.filter((item) => {
+        const itemPrice = parseInt(
+          (item.price || "0").toString().replace(/\./g, "")
+        );
+        return (
+          itemPrice >= formattedfilterFrom && itemPrice <= formattedfilterTo
+        );
+      });
+      
+      setFilteredProducts(filtered);
+    },
+    [products]
+  );
 
   const getProductsData = async () => {
+    setIsLoading(true);
+    setHasError(false);
+    
     try {
-      const response = await fetch(apiUrl('/getProducts/'));
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 секунд таймаут
+      
+      const response = await fetch(apiUrl("/getProducts/"), {
+        signal: controller.signal,
+      });
+      
+      clearTimeout(timeoutId);
+      
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
+      
       const json = await response.json();
+      
+      if (!Array.isArray(json) || json.length === 0) {
+        throw new Error("Пустой ответ от API");
+      }
+      
       const sortedProducts = json.sort((a, b) => {
-        const priceA = parseInt(a.price?.toString().replace(/\./g, '') || '0');
-        const priceB = parseInt(b.price?.toString().replace(/\./g, '') || '0');
+        const priceA = parseInt(a.price?.toString().replace(/\./g, "") || "0");
+        const priceB = parseInt(b.price?.toString().replace(/\./g, "") || "0");
         return priceA - priceB;
       });
+      
       setProducts(sortedProducts);
       setFilteredProducts(sortedProducts);
-      console.log('✅ Данные сборок получены из базы данных:', sortedProducts.length, 'шт.');
+      setIsLoading(false);
     } catch (error) {
-      console.error('❌ Ошибка при загрузке сборок из БД:', error);
-      console.log('⚠️ Используются статические данные из const.jsx');
-      // Fallback на статические данные
+      if (error.name !== 'AbortError') {
+        if (process.env.NODE_ENV === 'development') {
+          console.error("Ошибка загрузки сборок с API:", error);
+        }
+      }
+      
+      setHasError(true);
       const sortedStaticProducts = staticProducts.sort((a, b) => {
-        const priceA = parseInt(a.price?.toString().replace(/\./g, '') || '0');
-        const priceB = parseInt(b.price?.toString().replace(/\./g, '') || '0');
+        const priceA = parseInt(a.price?.toString().replace(/\./g, "") || "0");
+        const priceB = parseInt(b.price?.toString().replace(/\./g, "") || "0");
         return priceA - priceB;
       });
       setProducts(sortedStaticProducts);
       setFilteredProducts(sortedStaticProducts);
+      setIsLoading(false);
     }
-  }
+  };
+
+  const visibleProductsList = useMemo(
+    () => filteredProducts.slice(0, visibleProducts),
+    [filteredProducts, visibleProducts]
+  );
+
+  const EmptyState = ({ text }) => (
+    <div className={styles.emptyState}>
+      <p>{text}</p>
+    </div>
+  );
 
   return (
     <div className={styles.products}>
-      <ProductsFilters onClick={(price) => selectedFilter(price)} />
-      {filteredProducts.length === 0 && !isShowProducts && (
-        <div style={{textAlign: 'center', padding: '40px', color: '#fff'}}>
-          <p>Загрузка товаров...</p>
-        </div>
+      <ProductsFilters onClick={selectedFilter} />
+      
+      {isLoading && (
+        <EmptyState text="Загрузка сборок..." />
       )}
-      {filteredProducts.length === 0 && isShowProducts && (
-        <div style={{textAlign: 'center', padding: '40px', color: '#fff'}}>
-          <p>Товары не найдены</p>
-        </div>
+      
+      {!isLoading && filteredProducts.length === 0 && (
+        <EmptyState text="Нет сборок под этот диапазон. Попробуйте другие параметры." />
       )}
-      <div className={styles.productsCards}>
-        <Suspense fallback={
-          <div style={{textAlign: 'center', padding: '40px', color: '#fff', width: '100%'}}>
-            <p>Загрузка...</p>
+      
+      {!isLoading && filteredProducts.length > 0 && (
+        <>
+          <div className={styles.productsCards}>
+            {visibleProductsList.map((item, index) => (
+              <ProductsCard
+                key={item.id || `${item.title}-${index}`}
+                title={item.title}
+                image={item.img}
+                forTo={item.forTo}
+                devices={item.devices}
+                price={item.price}
+              />
+            ))}
           </div>
-        }>
-          {isShowProducts && filteredProducts?.slice(0, visibleProducts).map((item, index) => (
-            <>
-              <Animate
-                key={item.id}
-                easeType="linear"
-                play={products}
-                start={{ opacity: 0 }}
-                delay={0.3}
-                end={{ opacity: 1 }}
-              >
-                <ProductsCard
-                  // key={item.id}
-                  title={item.title}
-                  image={item.img}
-                  forTo={item.forTo}
-                  devices={item.devices}
-                  price={item.price}
-                />
-              </Animate>
-            </>
-          ) || null)}
-        </Suspense>
-      </div>
-      {visibleProducts < filteredProducts.length && (
-        <div className={styles.productsButtonWrapper}>
-          <Button onClick={showMoreProducts} className={styles.productsButton}>
-            Показать ещё
-          </Button>
-        </div>
+          
+          {visibleProducts < filteredProducts.length && (
+            <div className={styles.productsButtonWrapper}>
+              <Button onClick={showMoreProducts} className={styles.productsButton}>
+                Показать еще
+              </Button>
+            </div>
+          )}
+        </>
       )}
     </div>
   );

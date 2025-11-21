@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap");
+
 @font-face {
   font-weight: 250;
   font-family: RS;
@@ -22,79 +24,110 @@
   src: url("../fonts/RockStar/RS-extrabold.otf");
 }
 
-.grecaptcha-badge { 
+:root {
+  --bg-900: #05040c;
+  --bg-800: #0b0915;
+  --bg-700: #0f0d1d;
+  --accent-1: #c38cff;
+  --accent-2: #7f5aff;
+  --accent-3: #6ddcff;
+  --text-primary: #f2efff;
+  --text-secondary: #c3bfd9;
+  --muted: #8c88a6;
+  --glass: rgba(255, 255, 255, 0.03);
+  --glass-strong: rgba(255, 255, 255, 0.06);
+  --stroke: rgba(255, 255, 255, 0.1);
+  --radius-lg: 28px;
+  --radius-md: 18px;
+  --shadow-soft: 0 18px 80px rgba(3, 0, 20, 0.35);
+  --shadow-strong: 0 24px 110px rgba(127, 90, 255, 0.35);
+  color-scheme: dark;
+}
+
+.grecaptcha-badge {
   visibility: hidden;
 }
 
+* {
+  font-family: "Space Grotesk", "RS", system-ui, -apple-system, "Segoe UI", sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+}
+
 body {
-  background-color: #090808;
-  background-image: 
-    radial-gradient(circle at 20% 50%, rgba(176, 149, 255, 0.08) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(124, 83, 255, 0.06) 0%, transparent 50%),
-    radial-gradient(circle at 40% 20%, rgba(194, 122, 255, 0.05) 0%, transparent 50%),
-    url("../images/grid.svg");
-  background-position: 
-    top left,
-    bottom right,
+  background-color: var(--bg-900);
+  background-image:
+    url("../images/grid.svg"),
+    radial-gradient(52% 60% at 18% 18%, rgba(195, 140, 255, 0.1) 0%, rgba(3, 2, 10, 0) 60%),
+    radial-gradient(46% 52% at 82% 10%, rgba(109, 220, 255, 0.08) 0%, rgba(3, 2, 10, 0) 54%),
+    radial-gradient(80% 90% at 50% 72%, rgba(127, 90, 255, 0.06) 0%, rgba(5, 4, 12, 0) 68%),
+    linear-gradient(135deg, #0f0b1d 0%, #090815 38%, #0b0d1a 75%, #0a0816 100%);
+  background-position:
     top center,
-    top center;
-  background-size: 
-    800px 800px,
-    1000px 1000px,
-    600px 600px,
-    contain;
-  background-repeat: no-repeat, no-repeat, no-repeat, repeat;
+    center,
+    top right,
+    center center,
+    center center;
+  background-size:
+    420px 420px,
+    120% 120%,
+    100% 100%,
+    160% 160%,
+    cover;
+  background-repeat: repeat, no-repeat, no-repeat, no-repeat, no-repeat;
   width: 100%;
   height: 100%;
   overflow-x: hidden;
   position: relative;
-  
-  // Анимированные градиенты для глубины
+  color: var(--text-primary);
+  line-height: 1.6;
+
   &::before {
     content: "";
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: 
-      radial-gradient(ellipse at top, rgba(176, 149, 255, 0.03) 0%, transparent 50%),
-      radial-gradient(ellipse at bottom, rgba(124, 83, 255, 0.02) 0%, transparent 50%);
+    inset: 0;
     pointer-events: none;
+    background:
+      radial-gradient(ellipse at 20% 30%, rgba(195, 140, 255, 0.07) 0%, transparent 45%),
+      radial-gradient(ellipse at 80% 70%, rgba(109, 220, 255, 0.05) 0%, transparent 40%);
+    mix-blend-mode: screen;
+    opacity: 0.6;
+    animation: backgroundPulse 24s ease-in-out infinite;
     z-index: 0;
-    animation: backgroundPulse 20s ease-in-out infinite;
   }
-  
+
   &::after {
     content: "";
     position: fixed;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: 
-      radial-gradient(circle at 30% 30%, rgba(194, 122, 255, 0.04) 0%, transparent 30%),
-      radial-gradient(circle at 70% 70%, rgba(176, 149, 255, 0.03) 0%, transparent 30%);
+    inset: 0;
     pointer-events: none;
+    background-image:
+      radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 0),
+      linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 0),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 0);
+    background-size:
+      140px 140px,
+      120px 120px,
+      120px 120px;
+    background-position: 0 0, 0 0, 0 0;
+    opacity: 0.2;
     z-index: 0;
-    animation: backgroundRotate 30s linear infinite;
   }
+}
+
+a {
+  color: inherit;
 }
 
 @keyframes backgroundPulse {
-  0%, 100% {
-    opacity: 1;
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
   }
   50% {
-    opacity: 0.7;
-  }
-}
-
-@keyframes backgroundRotate {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
+    transform: scale(1.02);
+    opacity: 1;
   }
 }

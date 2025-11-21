@@ -10,25 +10,24 @@ const Gifts = () => {
         <div className={styles.giftsLeft}>
           <ul className={styles.giftsList}>
             <li className={styles.giftsListItem}>
-              1. Фирменную гарантию на компьютер от VA-PC
+              Фирменную гарантию на компьютер от VA-PC
             </li>
             <li className={styles.giftsListItem}>
-              2. Чек и коробки от комплектующих
+              Чек и коробки от комплектующих
             </li>
             <li className={styles.giftsListItem}>
-              3. Личное письмо от всей команды VA-PC
+              Личное письмо от всей команды VA-PC
             </li>
           </ul>
           <p className={styles.giftsDesc}>
-            Вы сможете обратиться к нам по гарантии в течение года, если с
-            компьютером что-то случится.
+            Вы сможете обратиться к нам по гарантии в течение года, если с компьютером что-то случится.
           </p>
         </div>
-        <img src={computerPhoto} alt="Фирменные девайсы" />
+        <img src={computerPhoto} alt="Подарки VA-PC" />
       </div>
       <div className={styles.giftsButtonWrapper}>
         <Button type="pink" onClick={() => goToLink('#form', '_self')} className={styles.giftsButton}>
-          Заказать пк
+          Получить подарки
         </Button>
       </div>
     </>

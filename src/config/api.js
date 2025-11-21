@@ -48,11 +48,13 @@ export const apiUrl = (endpoint) => {
   return hadTrailingSlash ? `/${cleanEndpoint}/` : `/${cleanEndpoint}`;
 };
 
-// Логирование для отладки (включаем и в production для диагностики)
-console.log('🔧 API Configuration:', {
-  API_BASE_URL: API_BASE_URL || '(относительные пути)',
-  NODE_ENV: process.env.NODE_ENV,
-  REACT_APP_API_URL: process.env.REACT_APP_API_URL || '(не задано)',
-  currentOrigin: typeof window !== 'undefined' ? window.location.origin : 'SSR'
-});
+// Логирование для отладки (только в development)
+if (process.env.NODE_ENV === 'development') {
+  console.log('🔧 API Configuration:', {
+    API_BASE_URL: API_BASE_URL || '(относительные пути)',
+    NODE_ENV: process.env.NODE_ENV,
+    REACT_APP_API_URL: process.env.REACT_APP_API_URL || '(не задано)',
+    currentOrigin: typeof window !== 'undefined' ? window.location.origin : 'SSR'
+  });
+}
 

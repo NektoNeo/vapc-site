@@ -10,50 +10,60 @@ const Socials = () => {
     {
       img: <DzenSVG />,
       link: "https://dzen.ru/vapcbuild",
-      desc: "",
       alt: "Дзен",
+      isYouTube: false,
+      isInstagram: false,
     },
     {
       img: <InstSVG />,
       link: "https://instagram.com/vapcbuild",
-      desc: "Meta признана экстремистской организацией на территории РФ",
-      alt: "Инстаграм",
+      alt: "Instagram*",
+      isYouTube: false,
+      isInstagram: true,
     },
     {
       img: <YtSVG />,
       link: "https://www.youtube.com/@vapcbuild",
-      desc: "",
-      alt: "Ютуб",
+      alt: "YouTube",
+      isYouTube: true,
+      isInstagram: false,
     },
     {
       img: <TgSVG />,
       link: "https://t.me/vapcbuild",
-      desc: "",
-      alt: "Телеграм",
+      alt: "Telegram",
+      isYouTube: false,
+      isInstagram: false,
     },
     {
       img: <VkSVG />,
       link: "https://vk.com/vapcbuild",
-      desc: "",
-      alt: "Вконтакте",
+      alt: "VK",
+      isYouTube: false,
+      isInstagram: false,
     },
   ];
+  
   return (
     <div className={styles.socilas}>
-      {socialItems.map((item, index) => {
-        return (
+      {socialItems.map((item, index) => (
+        <div key={index} className={styles.socialWrapper}>
           <a
-            key={index}
             target="_blank"
             aria-label={item.alt}
             href={item.link}
-            className={styles.socialsItem} rel="noreferrer"
+            className={`${styles.socialsItem} ${item.isYouTube ? styles.youtubeItem : ''}`} 
+            rel="noreferrer"
           >
             {item.img}
-            <div className={styles.socialItemDesc}>{item.desc}</div>
           </a>
-        );
-      })}
+          {item.isInstagram && (
+            <p className={styles.instagramWarning}>
+              Meta признана экстремистской организацией на территории РФ
+            </p>
+          )}
+        </div>
+      ))}
     </div>
   );
 };

@@ -1,6 +1,6 @@
+import { memo, useMemo, useCallback } from "react";
 import Button from "../Button";
 import styles from "./ProductsCard.module.scss";
-import light from "../../images/backgrounds/light.svg";
 import { ReactComponent as CpuSVG } from "../../images/products/cpu.svg";
 import { ReactComponent as GpuSVG } from "../../images/products/gpu.svg";
 import { ReactComponent as RamSVG } from "../../images/products/ram.svg";
@@ -9,131 +9,90 @@ import { ReactComponent as WaltSVG } from "../../images/products/walt.svg";
 import { ReactComponent as CoolSVG } from "../../images/products/cool.svg";
 import { goToLink } from "../../helpers/helpers";
 
-const ProductsCard = ({ title, image, forTo, devices, price, key }) => {
-  // Защита от ошибок: проверяем что devices - строка
-  const devicesString = typeof devices === 'string' ? devices : String(devices || '');
-  const devicesArray = devicesString.split(',');
-  
-  const formattedPrice = parseInt((price || '0').toString().replace(/\./g, ''));
-  const saveOnLocalStorage = (title) => {
+const specIcons = [CpuSVG, GpuSVG, RamSVG, DiskSVG, CoolSVG, WaltSVG];
+const specLabels = ["CPU:", "GPU:", "RAM:", "SSD:", "Кулер:", "БП:"];
+
+const ProductsCard = memo(({ title, image, forTo, devices, price }) => {
+  const devicesArray = useMemo(() => {
+    return Array.isArray(devices)
+      ? devices
+      : String(devices || "").split(",");
+  }, [devices]);
+
+  const formattedPrice = useMemo(() => {
+    return parseInt((price || "0").toString().replace(/\./g, ""));
+  }, [price]);
+
+  const saveOnLocalStorage = useCallback(() => {
     localStorage.setItem("PC", title);
     goToLink("#form", "_self");
-  };
-  const roundToNearest = (num) => {
-    const nearest = 100;
-    const roundedNum = Math.ceil(num / nearest) * nearest;
-    return roundedNum;
-  };
-  const productWhiteTheme = () => {
-    if (formattedPrice > 300000) {
-      return (
-        <>
-          <img src={light} className={styles.productGoldShadow} alt="light" />
-          <div className={styles.productPlanet} />
-          <div className={styles.productWide} />
-          <div className={styles.productSpeed} />
-        </>
-      );
-    }
-    if (formattedPrice > 100000) {
-      return (
-        <>
-          <img src={light} className={styles.productPurpleShadow} alt="light" />
-          <div className={styles.productPlanet} />
-          <div className={styles.productWide} />
-          <div className={styles.productSpeed} />
-        </>
-      );
-    }
-    return (
-      <>
-        <img src={light} className={styles.productWhiteShadow} alt="light" />
-        <div className={styles.productPlanet} />
-        <div className={styles.productWide} />
-        <div className={styles.productSpeed} />
-      </>
-    );
-  };
+  }, [title]);
+
+  const monthlyRounded = useMemo(() => {
+    const monthly = (formattedPrice * 1.155) / 12 || 0;
+    return Math.ceil(monthly / 100) * 100;
+  }, [formattedPrice]);
+
+  const tier = useMemo(() => {
+    return formattedPrice > 250000
+      ? "Workstation"
+      : formattedPrice > 140000
+      ? "Pro"
+      : formattedPrice > 80000
+      ? "Gaming"
+      : "Старт";
+  }, [formattedPrice]);
+
   return (
-    <div className={styles.product} key={key}>
-      <div className={styles.productWidth}>
-        <p className={styles.productTitle}>{title}</p>
-        <p className={styles.productTitleShadow}>{title}</p>
-        <div className={styles.productContainer}>
-          <div className={styles.productImageContainer}>
-            <img className={styles.productImage} src={image} alt="компьютер" />
-          </div>
-          <div className={styles.productStats}>
-            <div className={styles.productStatsTitle}>Комплектующие</div>
-            <div className={styles.productStatsContainer}>
-              <div className={styles.productStatsColumn}>
-                <div className={styles.productStatsItem}>
-                  <div className={styles.productStatsIcon}>
-                    <CpuSVG width="22" height="22" />
-                  </div>
-                  <p>{devicesArray[0] || ''}</p>
-                </div>
-                <div className={styles.productStatsItem}>
-                  <div className={styles.productStatsIcon}>
-                    <GpuSVG width="21" height="21" />
-                  </div>
-                  <p>{devicesArray[1] || ''}</p>
-                </div>
-                <div className={styles.productStatsItem}>
-                  <div className={styles.productStatsIcon}>
-                    <RamSVG width="22" height="22" />
-                  </div>
-                  <p>{devicesArray[2] || ''}</p>
-                </div>
-              </div>
-              <div className={styles.productStatsColumn}>
-                <div className={styles.productStatsItem}>
-                  <div className={styles.productStatsIcon}>
-                    <DiskSVG width="15" height="20" />
-                  </div>
-                  <p>{devicesArray[3] || ''}</p>
-                </div>
-                <div className={styles.productStatsItem}>
-                  <div className={styles.productStatsIcon}>
-                    <CoolSVG width="19" height="19" />
-                  </div>
-                  <p>{devicesArray[4] || ''}</p>
-                </div>
-                <div className={styles.productStatsItem}>
-                  <div className={styles.productStatsIcon}>
-                    <WaltSVG width="17" height="17" />
-                  </div>
-                  <p>{devicesArray[5] || ''}</p>
-                </div>
-              </div>
-            </div>
-            <div className={styles.productPriceContainer}>
-              <div className={styles.productPrice}>{price}Р</div>
-              <div className={styles.productPriceShadow}>{price}Р</div>
-            </div>
-            <a className={styles.productCredit} href="#payment">
-              <p className={styles.productCreditTitle}>В кредит/рассрочку</p>
-              <p className={styles.productCreditPrice}>
-                ОТ{" "}
-                {roundToNearest(
-                  ((formattedPrice / 100) * 15.5 + formattedPrice) / 12
-                )}{" "}
-                Р. В МЕСЯЦ
-              </p>
-            </a>
-            <Button
-              className={styles.productBuy}
-              type="pink"
-              onClick={() => saveOnLocalStorage(title)}
-            >
-              Купить
-            </Button>
-          </div>
-          {productWhiteTheme()}
+    <div className={styles.product}>
+      <div className={styles.productGlow}></div>
+      <div className={styles.productHeader}>
+        <div>
+          <p className={styles.productTitle}>{title}</p>
+          <p className={styles.productSubtitle}>{forTo || "Баланс производительности"}</p>
         </div>
+        <span className={styles.productBadge}>{tier}</span>
+      </div>
+      <div className={styles.productImageContainer}>
+        <img 
+          className={styles.productImage} 
+          src={image} 
+          alt={`Сборка ${title}`}
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+      <div className={styles.productStats}>
+        <div className={styles.productStatsTitle}>Комплектация</div>
+        <div className={styles.productStatsGrid}>
+          {devicesArray.slice(0, 6).map((spec, index) => {
+            const Icon = specIcons[index] || CpuSVG;
+            const label = specLabels[index] || "";
+            const trimmedSpec = String(spec || "").trim();
+            return (
+              <div key={`${title}-${index}`} className={styles.productStatsItem}>
+                <Icon width="20" height="20" />
+                <p>
+                  {label && trimmedSpec ? `${label} ${trimmedSpec}` : trimmedSpec}
+                </p>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+      <div className={styles.productFooter}>
+        <div className={styles.priceBlock}>
+          <p className={styles.productPrice}>{price} ₽</p>
+          <p className={styles.productCredit}>≈ {monthlyRounded.toLocaleString("ru-RU")} ₽/мес</p>
+        </div>
+        <Button className={styles.productBuy} type="pink" onClick={saveOnLocalStorage}>
+          Заказать
+        </Button>
       </div>
     </div>
   );
-};
+});
+
+ProductsCard.displayName = 'ProductsCard';
 
 export default ProductsCard;

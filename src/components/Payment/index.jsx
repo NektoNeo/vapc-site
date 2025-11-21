@@ -1,7 +1,6 @@
 import styles from './Payment.module.scss';
 import { ReactComponent as TinkoffSVG } from '../../images/svg/tinkoff.svg';
-import ellipseBig from '../../images/payments/ellipse_big.png'
-import ellipseSmall from '../../images/payments/ellipse_small.png'
+import ellipseBig from '../../images/payments/ellipse_big.png';
 
 const Payment = () => {
   return (
@@ -13,19 +12,19 @@ const Payment = () => {
           <span className={styles.aboutOptionsItem}>Выгодные условия</span>
           <span className={styles.aboutOptionsItem}>Быстрое одобрение</span>
         </div>
-        <img src={ellipseBig} alt='ell' className={styles.aboutBigEl}/>
+        <img src={ellipseBig} alt='Декор' className={styles.aboutBigEl}/>
         <div className={styles.aboutSmallEl}/>
       </div>
       <div className={styles.steps}>
-        <span className={styles.stepsTitle}>Рассрочка</span>
+        <span className={styles.stepsTitle}>РАССРОЧКА</span>
         <div className={styles.stepsList}>
-          <p className={styles.stepsListItem}>Оставьте заявку у нашего менеджера, указав вид оплаты “рассрочка”.</p>
+          <p className={styles.stepsListItem}>Оставьте заявку у нашего менеджера, указав вид оплаты "рассрочка".</p>
           <p className={styles.stepsListItem}>Получите ссылку на оформление рассрочки.</p>
           <p className={styles.stepsListItem}>Получите одобрение.</p>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Payment;

@@ -17,6 +17,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import { useIsAuth } from "./hooks/useIsAuth.tsx";
 import TelegramWeb from "./pages/TelegramWeb.jsx";
 import TelegramWebProduct from "./pages/TelegramWebProduct.jsx";
+import PcClub from "./pages/PcClub.jsx";
 
 const App = () => {
   const { isAuth, isLoading } = useIsAuth();
@@ -59,6 +60,7 @@ const App = () => {
       <Router>
         <Routes>
           <Route exact path="/" element={<MainPage/>}/>
+          <Route exact path="/pc-club" element={<PcClub/>}/>
           <Route exact path="/admin" element={<AdminAuth/>}/>
           <Route exact path="/tg-app" element={<TelegramWeb /> } />
           <Route exact path="/tg-app/product" element={<TelegramWebProduct />} />

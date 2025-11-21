@@ -11,7 +11,6 @@ import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import { apiUrl } from "../../config/api";
 
 const Form = () => {
-
   const { executeRecaptcha } = useGoogleReCaptcha();
 
   const [formError, setFormErrors] = useState({
@@ -28,7 +27,7 @@ const Form = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   
   const sendMail = async () => {
-    if (isSubmitting) return; // Предотвращаем повторную отправку
+    if (isSubmitting) return;
     
     setIsSubmitting(true);
     const localStoragePc = localStorage.getItem("PC");
@@ -40,14 +39,14 @@ const Form = () => {
       });
     }
     if (!form.email.length) {
-      toast.error("Укажите Ваш Email");
+      toast.error("Укажите Email");
       return setFormErrors({
         ...formError,
         email: true,
       });
     }
     if (!form.phone.length) {
-      toast.error("Укажите ваш номер телефона");
+      toast.error("Оставьте телефон для связи");
       return setFormErrors({
         ...formError,
         phone: true,
@@ -60,15 +59,22 @@ const Form = () => {
     });
 
     if (!executeRecaptcha) {
-      console.log('Execute recaptcha not yet available');
+      if (process.env.NODE_ENV === 'development') {
+        console.log('Execute recaptcha not yet available');
+      }
+      setIsSubmitting(false);
+      toast.error("Пожалуйста, подождите, система защиты загружается...");
       return;
     }
     
     const token = await executeRecaptcha('click');
 
     if (!token) {
-      console.error("reCAPTCHA токен не получен.");
-      // Можно вывести сообщение об ошибке пользователю
+      if (process.env.NODE_ENV === 'development') {
+        console.error("reCAPTCHA токен не получен.");
+      }
+      setIsSubmitting(false);
+      toast.error("Ошибка проверки безопасности. Попробуйте еще раз.");
       return;
     }
 
@@ -86,17 +92,19 @@ const Form = () => {
         email: '',
         phone: '',
         product: '',
-      })
+      });
   
       if (!response.ok) {
-        const errorMessage = await response.text(); // Получаем текст ответа
-        throw new Error(`Ошибка отправки: ${errorMessage}`);
+        const errorMessage = await response.text();
+        throw new Error(`Ошибка отправки формы: ${errorMessage}`);
       }
   
-      toast.success("Сообщение успешно отправлено!");
+      toast.success("Отправили заявку! Свяжемся в ближайшее время.");
     } catch (error) {
-      toast.error(`${error.message}`)
-      console.error("Ошибка отправки формы:", error);
+      toast.error(error.message || "Ошибка отправки формы. Попробуйте еще раз.");
+      if (process.env.NODE_ENV === 'development') {
+        console.error("Ошибка отправки формы:", error);
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -135,7 +143,7 @@ const Form = () => {
               ? isValidPhoneNumber(form.phone)
                 ? undefined
                 : "Invalid phone number"
-              : "Заполните поле корректно"
+              : "Введите номер телефона"
           }
         />
         <input
@@ -157,7 +165,7 @@ const Form = () => {
           onClick={sendMail}
           disabled={isSubmitting}
         >
-          {isSubmitting ? "Отправка..." : "Оставить заявку"}
+          {isSubmitting ? "Отправляем..." : "Получить консультацию"}
         </Button>
       </div>
     </div>
