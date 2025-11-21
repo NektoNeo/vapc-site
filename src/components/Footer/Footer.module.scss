@@ -6,6 +6,12 @@
   align-items: center;
   padding: clamp(24px, 4vw, 40px) 0;
   position: relative;
+  z-index: 2;
+}
+
+.footerColumn {
+  position: relative;
+  z-index: 3;
 }
 
 .footerData {
