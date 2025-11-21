@@ -125,19 +125,30 @@
   margin-bottom: 14px;
 }
 
+.serviceButtonWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 63px;
+}
+
 .serviceButton {
-  display: block;
-  max-width: 369px;
-  margin: 63px auto;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  width: auto;
+  max-width: 90%;
+  padding: 0.9em 2em;
 
   span {
-    font-size: 27.6174px;
+    font-size: clamp(16px, 2vw, 22px); // Адаптивный размер, чтобы помещался
     font-weight: 800;
-    line-height: 32px;
-
+    line-height: 1.2;
     color: #ffffff;
-
     text-shadow: 0px 4.2659px 4.2659px rgba(0, 0, 0, 0.25);
+    white-space: nowrap;
   }
 }
 
@@ -181,9 +192,11 @@
   }
 
   .serviceButton {  
-    width: 100%;
+    width: auto;
+    max-width: 90%;
+    padding: 0.8em 1.5em;
     span {
-      font-size: 21px;
+      font-size: clamp(14px, 4vw, 18px);
     }
   }
   .serviceButton {

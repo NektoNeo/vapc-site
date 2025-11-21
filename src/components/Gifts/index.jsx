@@ -26,9 +26,11 @@ const Gifts = () => {
         </div>
         <img src={computerPhoto} alt="Фирменные девайсы" />
       </div>
-      <Button type="pink" onClick={() => goToLink('#form', '_self')} className={styles.giftsButton}>
-        Заказать пк
-      </Button>
+      <div className={styles.giftsButtonWrapper}>
+        <Button type="pink" onClick={() => goToLink('#form', '_self')} className={styles.giftsButton}>
+          Заказать пк
+        </Button>
+      </div>
     </>
   );
 };

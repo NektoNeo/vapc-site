@@ -72,13 +72,15 @@ const Services = () => {
           </div>
         ))}
       </div>
-      <Button
-        type="pink"
-        onClick={() => goToLink("#form", "_self")}
-        className={styles.serviceButton}
-      >
-        Заказать свой идеальный ПК
-      </Button>
+      <div className={styles.serviceButtonWrapper}>
+        <Button
+          type="pink"
+          onClick={() => goToLink("#form", "_self")}
+          className={styles.serviceButton}
+        >
+          Заказать свой идеальный ПК
+        </Button>
+      </div>
     </>
   );
 };

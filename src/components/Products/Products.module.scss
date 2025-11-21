@@ -18,23 +18,31 @@
   flex-wrap: wrap;
 }
 
-.productsButton {
+.productsButtonWrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 330px;
-  height: 68px;
-  margin: 28px auto 0;
-  box-shadow: 0px 58.11161px 45.65912px -25.59678px rgba(29, 32, 33, 0.64);
-  -webkit-backdrop-filter: blur(21.5px);
-  backdrop-filter: blur(21.5px);
+  width: 100%;
+  margin-top: 28px;
+}
+
+.productsButton {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  min-width: 200px;
+  max-width: 90%;
+  padding: 0.9em 2em;
+  margin: 0 auto;
+  
   span {
-    font-size: 26px;
-    margin-bottom: 3px;
+    font-size: clamp(14px, 1.5vw, 20px); // Адаптивный размер
     font-weight: 800;
-    line-height: 32px;
+    line-height: 1.2;
     color: #ffffff;
     text-shadow: 0px 4.2659px 4.2659px rgba(0, 0, 0, 0.25);
+    white-space: nowrap;
   }
 }
 
@@ -49,10 +57,12 @@
     margin-top: 15px;
   }
   .productsButton {
-    max-height: 47px;
-    width: 290px;
+    width: auto;
+    min-width: 180px;
+    max-width: 90%;
+    padding: 0.8em 1.5em;
     span {
-      font-size: 18.571px;
+      font-size: clamp(12px, 3.5vw, 16px);
     }
   }
 }

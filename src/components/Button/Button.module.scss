@@ -4,100 +4,174 @@
   border: none;
   background: transparent;
   padding: 15px 30px;
-  transition: all 0.2s;
   cursor: pointer;
+  font-family: "RS";
+  font-style: normal;
+  font-weight: 800;
+  font-size: 16.9704px;
+  line-height: 17px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #ffffff;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  min-height: 44px; // Минимальный размер для touch targets
 
   span {
     position: relative;
     display: inline-block;
     z-index: 3;
-    font-family: "RS";
-    font-style: normal;
-    font-weight: 800;
-    font-size: 16.9704px;
-    line-height: 17px;
-    /* identical to box height */
+  }
+  
+  &:disabled,
+  &.buttonDisabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}
 
-    text-align: center;
-    text-transform: uppercase;
+/* Основная CTA кнопка (buttonPink) - стиль с градиентом и свечением */
+.buttonPink {
+  min-width: 120px;
+  min-height: 44px;
+  padding: 0.9em 1.8em;
+  transition: 0.8s;
+  background-size: 280% auto;
+  background-image: linear-gradient(
+    325deg,
+    rgba(194, 122, 255, 1) 0%,
+    rgba(124, 83, 255, 1) 55%,
+    rgba(194, 122, 255, 1) 90%
+  );
+  border-radius: 50px; // Более закругленные края
+  box-shadow:
+    0px 0px 20px rgba(124, 83, 255, 0.5),
+    0px 5px 5px -1px rgba(124, 83, 255, 0.25),
+    inset 4px 4px 8px rgba(194, 122, 255, 0.3),
+    inset -4px -4px 8px rgba(124, 83, 255, 0.35);
+  white-space: nowrap; // Предотвращаем перенос текста
+  overflow: hidden;
+  text-overflow: ellipsis;
 
-    color: #ffffff;
-
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  span {
+    font-size: clamp(14px, 1.2vw, 18px); // Адаптивный размер шрифта
+    line-height: 1.2;
+    padding: 0 4px; // Небольшой внутренний отступ для текста
   }
 
   &:hover {
-    &::before {
-      border: 3.05px solid rgba(255, 255, 255, 0.21);
-      // border-radius: 21px;
-      background: linear-gradient(167.1deg, rgba(176, 149, 255, 1) 1.06%, rgba(176, 149, 255, 0.92) 92.98%);
-      transition: background 0.2s linear, border 0.2s linear;
-    }
-    &::after {
-      transition: background 0.2s linear;
-      background: linear-gradient(
-          167.1deg,
-          rgba(124, 83, 255, 0.8) 1.06%,
-          rgba(194, 122, 255, 0.8) 92.98%
-        ),
-        linear-gradient(
-          0deg,
-          rgba(255, 255, 255, 0.21),
-          rgba(255, 255, 255, 0.21)
-        );
-    }
+    background-position: right top;
+  }
+
+  &:is(:focus, :focus-visible) {
+    outline: none;
+    box-shadow:
+      0 0 0 3px rgba(255, 255, 255, 0.5),
+      0 0 0 6px rgba(194, 122, 255, 0.6),
+      0px 0px 20px rgba(124, 83, 255, 0.5),
+      0px 5px 5px -1px rgba(124, 83, 255, 0.25);
+  }
+  
+  &:active {
+    transform: scale(0.98);
+  }
+
+  &::after {
+    display: none;
   }
 }
 
-.buttonPink::after {
-  content: "";
-  display: block;
-  position: absolute;
-  z-index: 2;
-  left: 0px;
-  top: 0px;
-  width: calc(100% - 4px);
-  height: calc(100% - 4px);
-  border-radius: 26px;
-  background: linear-gradient(167.1deg, rgba(124, 83, 255, 0.8) 1.06%, rgba(194, 122, 255, 0.8) 92.98%);
-  border: 3.5px solid rgba(255, 255, 255, 0.21);
+/* Обычная кнопка - стиль с прозрачным фоном и свечением при hover */
+.button {
+  position: relative;
+  padding: 12px 24px;
+  border-radius: 50px; // Более закругленные края
+  border: 1px solid rgba(176, 149, 255, 0.6);
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  background: transparent;
+  color: #fff;
+  box-shadow: 0 0 0 0 transparent;
+  transition: all 0.2s ease-in;
+  white-space: nowrap; // Предотвращаем перенос текста
+  overflow: hidden;
+  text-overflow: ellipsis;
+  
+  span {
+    font-size: clamp(12px, 1vw, 16px); // Адаптивный размер шрифта
+    line-height: 1.2;
+    padding: 0 4px; // Небольшой внутренний отступ для текста
+  }
+
+  &::before {
+    content: '';
+    display: block;
+    width: 0px;
+    height: 86%;
+    position: absolute;
+    top: 7%;
+    left: 0%;
+    opacity: 0;
+    background: #fff;
+    box-shadow: 0 0 50px 30px #fff;
+    transform: skewX(-20deg);
+    transition: all 0.2s ease-in;
+  }
+
+  &:hover {
+    background: rgba(176, 149, 255, 0.2);
+    border-color: rgba(176, 149, 255, 1);
+    box-shadow: 0 0 30px 5px rgba(176, 149, 255, 0.5);
+    transition: all 0.2s ease-out;
+  }
+
+  &:hover::before {
+    animation: sh02 0.5s 0s linear;
+  }
+  
+  &:focus {
+    outline: none;
+    border-color: rgba(176, 149, 255, 0.8);
+    box-shadow: 
+      0 0 0 3px rgba(176, 149, 255, 0.3),
+      0 0 30px 5px rgba(176, 149, 255, 0.5);
+  }
+
+  &:active {
+    box-shadow: 0 0 0 0 transparent;
+    transition: box-shadow 0.2s ease-in;
+    transform: scale(0.98);
+  }
+
+  &::after {
+    display: none;
+  }
 }
 
-.button::before {
-  transition: background 0.2s linear, color 0.2s linear;
-  content: "";
-  display: block;
-  position: absolute;
-  z-index: 2;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 16px;
-  background: linear-gradient(
-    167.1deg,
-    rgba(176, 149, 255, 0) 1.06%,
-    rgba(176, 149, 255, 0.92) 92.98%
-  );
+@keyframes sh02 {
+  from {
+    opacity: 0;
+    left: 0%;
+  }
+  50% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    left: 100%;
+  }
 }
 
-/* Border */
-.button::after {
-  transition: background 0.2s linear, color 0.2s linear;
-  content: "";
-  display: block;
-  position: absolute;
-  z-index: 2;
-  left: 2px;
-  top: 2px;
-  width: calc(100% - 4px);
-  height: calc(100% - 4px);
-  border-radius: 15px;
-  background: linear-gradient(
-    0deg,
-    rgba(0, 0, 0, 1) 0%,
-    rgba(74, 74, 74, 1) 100%
-  );
+@media (prefers-reduced-motion: reduce) {
+  .buttonPink {
+    transition: none;
+  }
+  .button {
+    transition: none;
+  }
 }
 
 @media screen and (max-width: 768px) {

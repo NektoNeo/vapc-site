@@ -22,6 +22,48 @@
   <meta name="yandex-verification" content="997f7b01cb04b659" />
   <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
   <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+  <script>
+    // Патч для className - должен выполняться до загрузки внешних скриптов
+    (function() {
+      if (typeof HTMLElement !== 'undefined') {
+        try {
+          const elementProto = HTMLElement.prototype || Element.prototype;
+          const originalClassNameDescriptor = Object.getOwnPropertyDescriptor(elementProto, 'className');
+          
+          if (originalClassNameDescriptor && !originalClassNameDescriptor.get) {
+            // Переопределяем getter для className, чтобы всегда возвращать строку
+            Object.defineProperty(elementProto, 'className', {
+              get: function() {
+                if (this.classList && this.classList.length > 0) {
+                  return Array.from(this.classList).join(' ');
+                }
+                return '';
+              },
+              set: function(value) {
+                if (this.classList) {
+                  this.classList.value = '';
+                  if (value) {
+                    const classes = typeof value === 'string' 
+                      ? value.split(/\s+/).filter(c => c.trim()) 
+                      : [];
+                    classes.forEach(cls => {
+                      if (cls && cls.trim()) {
+                        this.classList.add(cls.trim());
+                      }
+                    });
+                  }
+                }
+              },
+              configurable: true,
+              enumerable: true
+            });
+          }
+        } catch (e) {
+          // Игнорируем ошибки патчинга
+        }
+      }
+    })();
+  </script>
   <script>window.yaContextCb = window.yaContextCb || []</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
   <title>VA-PC | Сборка ПК на заказ</title>

@@ -71,7 +71,9 @@ const Cases = () => {
           );
         })}
       </div>
-      <Button onClick={() => goToLink('https://vk.com/topic-218975719_49337252')} className={styles.casesButton}>Показать ещё</Button>
+      <div className={styles.casesButtonWrapper}>
+        <Button onClick={() => goToLink('https://vk.com/topic-218975719_49337252')} className={styles.casesButton}>Показать ещё</Button>
+      </div>
     </>
   );
 };

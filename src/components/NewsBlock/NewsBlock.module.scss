@@ -69,6 +69,13 @@
 
 @media screen and (max-width: 768px) {
   .content {
-     display: none;
+    max-height: 200px;
+    margin-top: 30px;
+    border-radius: 20px;
+    
+    img {
+      max-height: 200px;
+      object-fit: cover;
+    }
   } 
  }

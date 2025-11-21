@@ -25,7 +25,12 @@ const Form = () => {
     email: "",
     product: null,
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  
   const sendMail = async () => {
+    if (isSubmitting) return; // Предотвращаем повторную отправку
+    
+    setIsSubmitting(true);
     const localStoragePc = localStorage.getItem("PC");
     if (!form.name.length) {
       toast.error("Укажите имя");
@@ -92,6 +97,8 @@ const Form = () => {
     } catch (error) {
       toast.error(`${error.message}`)
       console.error("Ошибка отправки формы:", error);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -143,9 +150,16 @@ const Form = () => {
           value={form.email}
         />
       </div>
-      <Button type="pink" className={styles.formButton} onClick={sendMail}>
-        Оставить заявку
-      </Button>
+      <div className={styles.formButtonWrapper}>
+        <Button 
+          type="pink" 
+          className={styles.formButton} 
+          onClick={sendMail}
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? "Отправка..." : "Оставить заявку"}
+        </Button>
+      </div>
     </div>
   );
 };

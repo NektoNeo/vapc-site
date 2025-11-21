@@ -19,14 +19,35 @@ import { motion } from "framer-motion";
 import { Header } from "../components/Header";
 import { Animate, AnimateKeyframes, AnimateGroup } from "react-simple-animate";
 import { YMInitializer } from "react-yandex-metrika";
+import Button from "../components/Button";
 
 const MainPage = () => {
   const windowSize = useRef([window.innerWidth, window.innerHeight]);
   const [isMobile, updateIsMobile] = useState(false);
+  const [showScrollTop, setShowScrollTop] = useState(false);
+  
   useEffect(() => {
     updateIsMobile(windowSize.current[0] < 1024);
-    return () => window.localStorage.removeItem("PC");
+    
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 300);
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.localStorage.removeItem("PC");
+    };
   }, []);
+  
+  const scrollToTop = () => {
+    try {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } catch (error) {
+      console.warn('Ошибка при прокрутке наверх:', error);
+      window.scrollTo(0, 0);
+    }
+  };
 
   const defaultBlockAnimation = {
     hidden: {
@@ -48,7 +69,7 @@ const MainPage = () => {
       <YMInitializer
         accounts={[95153753]}
         options={{
-          clickmap: true,
+          clickmap: false, // Отключаем clickmap чтобы избежать ошибок с className
           trackLinks: true,
           accurateTrackBounce: true,
           webvisor: true,
@@ -262,6 +283,45 @@ const MainPage = () => {
           <Footer />
         </div>
       </motion.section>
+      {showScrollTop && (
+        <motion.button
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0 }}
+          onClick={scrollToTop}
+          className={styles.scrollTop}
+          aria-label="Наверх"
+          style={{
+            position: 'fixed',
+            bottom: '30px',
+            right: '30px',
+            width: '50px',
+            height: '50px',
+            borderRadius: '50%',
+            background: 'linear-gradient(325deg, rgba(194, 122, 255, 1) 0%, rgba(124, 83, 255, 1) 55%, rgba(194, 122, 255, 1) 90%)',
+            border: 'none',
+            color: '#fff',
+            fontSize: '24px',
+            cursor: 'pointer',
+            zIndex: 100,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            boxShadow: '0 4px 20px rgba(124, 83, 255, 0.4)',
+            transition: 'all 0.3s ease'
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = 'translateY(-5px)';
+            e.currentTarget.style.boxShadow = '0 6px 25px rgba(124, 83, 255, 0.6)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = 'translateY(0)';
+            e.currentTarget.style.boxShadow = '0 4px 20px rgba(124, 83, 255, 0.4)';
+          }}
+        >
+          ↑
+        </motion.button>
+      )}
     </div>
   );
 };

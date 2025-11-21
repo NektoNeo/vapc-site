@@ -2,7 +2,6 @@ import Button from "../Button";
 import HeaderMenu from "../HeaderMenu";
 import logo from "../../images/svg/logo.svg";
 import styles from "./Header.module.scss";
-import { ReactComponent as BurgerSVG } from "../../images/svg/mobileBurger.svg";
 import HeaderMobileMenu from "../HeaderMobileMenu";
 import { useState } from "react";
 import classNames from "classnames";
@@ -25,7 +24,19 @@ export const Header = () => {
             [styles.headerMobileFixed]: mobileMenu,
           })}
         >
-          <BurgerSVG onClick={() => showMobileMenu(!mobileMenu)} />
+          <button
+            className={classNames(styles.toggle, {
+              [styles.toggleActive]: mobileMenu,
+            })}
+            onClick={() => showMobileMenu(!mobileMenu)}
+            aria-label={mobileMenu ? "Закрыть меню" : "Открыть меню"}
+            aria-expanded={mobileMenu}
+            type="button"
+          >
+            <div className={styles.bars} id="bar1"></div>
+            <div className={styles.bars} id="bar2"></div>
+            <div className={styles.bars} id="bar3"></div>
+          </button>
         </div>
         <HeaderMobileMenu
           onClick={(isShow) => showMobileMenu(isShow)}

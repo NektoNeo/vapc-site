@@ -4,13 +4,75 @@ html {
 
 body {
   background-color: #090808;
-  background-image: url("./images/grid.svg");
-  background-position: top center;
-  background-size: contain;
-  background-repeat: repeat;
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(176, 149, 255, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(124, 83, 255, 0.06) 0%, transparent 50%),
+    radial-gradient(circle at 40% 20%, rgba(194, 122, 255, 0.05) 0%, transparent 50%),
+    url("./images/grid.svg");
+  background-position: 
+    top left,
+    bottom right,
+    top center,
+    top center;
+  background-size: 
+    800px 800px,
+    1000px 1000px,
+    600px 600px,
+    contain;
+  background-repeat: no-repeat, no-repeat, no-repeat, repeat;
   width: 100%;
   height: 100%;
   overflow-x: hidden;
+  position: relative;
+  
+  // Анимированные градиенты для глубины
+  &::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+      radial-gradient(ellipse at top, rgba(176, 149, 255, 0.03) 0%, transparent 50%),
+      radial-gradient(ellipse at bottom, rgba(124, 83, 255, 0.02) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+    animation: backgroundPulse 20s ease-in-out infinite;
+  }
+  
+  &::after {
+    content: "";
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: 
+      radial-gradient(circle at 30% 30%, rgba(194, 122, 255, 0.04) 0%, transparent 30%),
+      radial-gradient(circle at 70% 70%, rgba(176, 149, 255, 0.03) 0%, transparent 30%);
+    pointer-events: none;
+    z-index: 0;
+    animation: backgroundRotate 30s linear infinite;
+  }
+}
+
+@keyframes backgroundPulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes backgroundRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .NotFound {
@@ -33,6 +95,8 @@ body {
 
 .main {
   position: relative;
+  z-index: 1;
+  
   &::before {
     content: "";
     width: 100%;
@@ -41,8 +105,28 @@ body {
     left: 0;
     top: 0;
     opacity: 0.74;
-    background: linear-gradient(0deg, rgba(9, 8, 8, 0.00) 0%, #090808 100%);
+    background: linear-gradient(
+      0deg, 
+      rgba(9, 8, 8, 0.00) 0%, 
+      rgba(9, 8, 8, 0.5) 50%,
+      #090808 100%
+    );
     z-index: -1;
+  }
+  
+  // Добавляем фиолетовые акценты в верхней части
+  &::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: 
+      radial-gradient(ellipse 800px 600px at 20% 0%, rgba(176, 149, 255, 0.06) 0%, transparent 60%),
+      radial-gradient(ellipse 1000px 800px at 80% 0%, rgba(124, 83, 255, 0.04) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
   }
 }
 
@@ -61,41 +145,53 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 15px;
+  position: relative;
+  z-index: 1;
 }
 
 .services {
   margin-top: 63px;
   position: relative;
+  z-index: 1;
 }
 
 .servicesLightRight {
   position: absolute;
   right: 0;
   top: 0;
-  width: 184px;
-  height: 168px;
-  background: #ffffff;
-  opacity: 1;
-  filter: blur(171px);
-  -webkit-filter: blur(171px);
-  -ms-filter: blur(171px);
-  // filter: url("data:image/svg+xml;utf9,<svg%20version='1.1'%20xmlns='http://www.w3.org/2000/svg'><filter%20id='blur'><feGaussianBlur%20stdDeviation='3'%20/></filter></svg>#blur");
-  filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='243'); 
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(176, 149, 255, 0.15) 0%, rgba(124, 83, 255, 0.1) 50%, transparent 70%);
+  opacity: 0.8;
+  filter: blur(100px);
+  -webkit-filter: blur(100px);
+  animation: lightPulse 4s ease-in-out infinite;
+  z-index: 0;
 }
 
 .servicesLightLeft {
   position: absolute;
   left: 0;
   bottom: 0;
-  width: 184px;
-  height: 168px;
-  background: #ffffff;
-  opacity: 1;
-  filter: blur(171px);
-  -webkit-filter: blur(171px);
-  -ms-filter: blur(171px);
-  // filter: url("data:image/svg+xml;utf9,<svg%20version='1.1'%20xmlns='http://www.w3.org/2000/svg'><filter%20id='blur'><feGaussianBlur%20stdDeviation='3'%20/></filter></svg>#blur");
-  filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='243'); 
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(194, 122, 255, 0.15) 0%, rgba(176, 149, 255, 0.1) 50%, transparent 70%);
+  opacity: 0.8;
+  filter: blur(100px);
+  -webkit-filter: blur(100px);
+  animation: lightPulse 5s ease-in-out infinite;
+  z-index: 0;
+}
+
+@keyframes lightPulse {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.1);
+  }
 }
 
 @-moz-document url-prefix()
@@ -167,8 +263,26 @@ body {
 }
 
 .products {
+  position: relative;
+  z-index: 1;
+  
   .container {
     max-width: 1130px;
+  }
+  
+  // Фиолетовое свечение для секции продуктов
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1200px;
+    height: 1200px;
+    background: radial-gradient(circle, rgba(124, 83, 255, 0.05) 0%, transparent 70%);
+    filter: blur(80px);
+    z-index: 0;
+    pointer-events: none;
   }
 }
 
@@ -177,6 +291,8 @@ body {
     max-width: 1230px;
   }
   position: relative;
+  z-index: 1;
+  
   &::before {
     content: "";
     position: absolute;
@@ -187,11 +303,29 @@ body {
     background-repeat: no-repeat;
     width: 366px;
     height: 928px;
+    opacity: 0.6; // Немного уменьшаем видимость для более современного вида
+  }
+  
+  // Добавляем фиолетовое свечение
+  &::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(194, 122, 255, 0.08) 0%, transparent 60%);
+    filter: blur(100px);
+    z-index: 0;
+    pointer-events: none;
   }
 }
 
 .cases {
   position: relative;
+  z-index: 1;
+  
   &::after {
     content: "";
     top: -480px;
@@ -202,7 +336,24 @@ body {
     background-position: center center;
     background-repeat: no-repeat;
     z-index: -1;
+    opacity: 0.5; // Уменьшаем видимость для более современного вида
   }
+  
+  // Добавляем фиолетовое свечение сверху
+  &::before {
+    content: "";
+    position: absolute;
+    top: -200px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, rgba(176, 149, 255, 0.06) 0%, transparent 60%);
+    filter: blur(120px);
+    z-index: 0;
+    pointer-events: none;
+  }
+  
   .container {
     max-width: 1090px;
   }
@@ -236,9 +387,12 @@ body {
 
 .footer {
   position: relative;
+  z-index: 1;
+  
   .container {
     max-width: 1230px;
   }
+  
   &:before {
     content: '';
     position: absolute;
@@ -248,7 +402,28 @@ body {
     width: 100%;
     height: 300px;
     background-repeat: no-repeat;
-    background: linear-gradient(180deg, rgba(9, 8, 8, 0.00) 0%, #090808 100%);
+    background: linear-gradient(
+      180deg, 
+      rgba(9, 8, 8, 0.00) 0%, 
+      rgba(124, 83, 255, 0.02) 30%,
+      rgba(9, 8, 8, 0.8) 70%,
+      #090808 100%
+    );
+  }
+  
+  // Фиолетовое свечение внизу
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1000px;
+    height: 400px;
+    background: radial-gradient(ellipse, rgba(176, 149, 255, 0.05) 0%, transparent 70%);
+    filter: blur(100px);
+    z-index: 0;
+    pointer-events: none;
   }
 }
 

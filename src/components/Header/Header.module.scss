@@ -57,6 +57,75 @@
   z-index: 999;
 }
 
+.toggle {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition-duration: .5s;
+  background: transparent;
+  border: none;
+  padding: 0;
+  
+  &:focus {
+    outline: 2px solid rgba(176, 149, 255, 0.5);
+    outline-offset: 4px;
+    border-radius: 4px;
+  }
+  
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.bars {
+  width: 100%;
+  height: 4px;
+  background-color: rgb(176, 149, 255);
+  border-radius: 4px;
+  transition-duration: .3s;
+}
+
+#bar2 {
+  transition-duration: .8s;
+}
+
+#bar1, #bar3 {
+  width: 70%;
+}
+
+.toggleActive .bars {
+  position: absolute;
+  transition-duration: .5s;
+}
+
+.toggleActive #bar2 {
+  transform: scaleX(0);
+  transition-duration: .5s;
+}
+
+.toggleActive #bar1 {
+  width: 100%;
+  transform: rotate(45deg);
+  transition-duration: .5s;
+}
+
+.toggleActive #bar3 {
+  width: 100%;
+  transform: rotate(-45deg);
+  transition-duration: .5s;
+}
+
+.toggleActive {
+  transition-duration: .5s;
+  transform: rotate(180deg);
+}
+
 @media screen and (max-width: 1230px) {
   .header {
     flex-direction: column;

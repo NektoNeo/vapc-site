@@ -75,8 +75,22 @@ const Products = () => {
   return (
     <div className={styles.products}>
       <ProductsFilters onClick={(price) => selectedFilter(price)} />
+      {filteredProducts.length === 0 && !isShowProducts && (
+        <div style={{textAlign: 'center', padding: '40px', color: '#fff'}}>
+          <p>Загрузка товаров...</p>
+        </div>
+      )}
+      {filteredProducts.length === 0 && isShowProducts && (
+        <div style={{textAlign: 'center', padding: '40px', color: '#fff'}}>
+          <p>Товары не найдены</p>
+        </div>
+      )}
       <div className={styles.productsCards}>
-        <Suspense fallback={null}>
+        <Suspense fallback={
+          <div style={{textAlign: 'center', padding: '40px', color: '#fff', width: '100%'}}>
+            <p>Загрузка...</p>
+          </div>
+        }>
           {isShowProducts && filteredProducts?.slice(0, visibleProducts).map((item, index) => (
             <>
               <Animate
@@ -101,9 +115,11 @@ const Products = () => {
         </Suspense>
       </div>
       {visibleProducts < filteredProducts.length && (
-        <Button onClick={showMoreProducts} className={styles.productsButton}>
-          Показать ещё
-        </Button>
+        <div className={styles.productsButtonWrapper}>
+          <Button onClick={showMoreProducts} className={styles.productsButton}>
+            Показать ещё
+          </Button>
+        </div>
       )}
     </div>
   );

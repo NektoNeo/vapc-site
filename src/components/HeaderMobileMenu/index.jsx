@@ -17,7 +17,28 @@ const HeaderMobileMenu = ({ menuItems, isShow, onClick }) => {
       <ul className={styles.mobileMenuList}>
         {menuItems.map((item) => (
           <li key={item.name} className={styles.mobileMenuItem}>
-            <a href={item.link} onClick={() => onClick(!isShow)}>
+            <a 
+              href={item.link} 
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                onClick(false);
+                // Небольшая задержка для плавного закрытия меню
+                setTimeout(() => {
+                  try {
+                    const element = document.querySelector(item.link);
+                    if (element && typeof element.scrollIntoView === 'function') {
+                      element.scrollIntoView({ 
+                        behavior: 'smooth',
+                        block: 'start'
+                      });
+                    }
+                  } catch (error) {
+                    console.warn('Ошибка при прокрутке:', error);
+                  }
+                }, 100);
+              }}
+            >
               {item.name}
             </a>
           </li>

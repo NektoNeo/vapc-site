@@ -12,10 +12,30 @@
   max-width: 340px;
   height: 154px;
   max-height: 154px;
-  background: rgba(217, 217, 217, 0.01);
   background-size: 146px 295px;
-  border: 1px solid #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 29px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background: linear-gradient(
+    135deg,
+    rgba(176, 149, 255, 0.08) 0%,
+    rgba(124, 83, 255, 0.05) 50%,
+    rgba(22, 22, 22, 0.3) 100%
+  );
+  box-shadow: 
+    0 8px 32px 0 rgba(124, 83, 255, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: rgba(176, 149, 255, 0.4);
+    box-shadow: 
+      0 12px 40px 0 rgba(124, 83, 255, 0.25),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    transform: translateY(-5px);
+  }
+
   .stepBackground {
     z-index: -1;
     width: 146px;
