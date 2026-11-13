@@ -1,67 +1,22 @@
-#!/bin/bash
-# Скрипт для автоматической настройки SSH доступа без пароля
-# Использование: bash setup-ssh-access.sh
+#!/usr/bin/env bash
+set -euo pipefail
 
-SERVER_IP="45.141.76.200"
-SERVER_USER="root"
-PASSWORD="R9AuQIMM&gt&"
-PUB_KEY_PATH="$HOME/.ssh/id_rsa.pub"
-
-echo "=== Настройка SSH доступа без пароля ==="
-echo "Сервер: $SERVER_USER@$SERVER_IP"
-echo ""
-
-# Проверяем наличие публичного ключа
-if [ ! -f "$PUB_KEY_PATH" ]; then
-    echo "ОШИБКА: Публичный ключ не найден!"
-    echo "Создайте ключ командой: ssh-keygen -t rsa -b 4096"
+target=${1:-}
+if [[ -z "$target" ]]; then
+    read -rp 'SSH destination (user@host or SSH config alias): ' target
+fi
+if [[ -z "$target" || "$target" == -* || "$target" =~ [[:space:]] ]]; then
+    echo 'Supply a single SSH destination.' >&2
     exit 1
 fi
-
-echo "✅ Публичный ключ найден"
-echo ""
-
-# Читаем публичный ключ
-PUBLIC_KEY=$(cat "$PUB_KEY_PATH")
-echo "Публичный ключ:"
-echo "$PUBLIC_KEY"
-echo ""
-
-# Проверяем наличие sshpass
-if command -v sshpass &> /dev/null; then
-    echo "Используем sshpass для автоматической передачи пароля..."
-    
-    # Создаем скрипт для добавления ключа
-    cat > /tmp/ssh-setup.sh << EOF
-mkdir -p ~/.ssh
-chmod 700 ~/.ssh
-echo '$PUBLIC_KEY' >> ~/.ssh/authorized_keys
-chmod 600 ~/.ssh/authorized_keys
-EOF
-    
-    # Копируем скрипт на сервер и выполняем
-    echo "Копируем ключ на сервер..."
-    sshpass -p "$PASSWORD" scp -o StrictHostKeyChecking=no /tmp/ssh-setup.sh "${SERVER_USER}@${SERVER_IP}:/tmp/ssh-setup.sh"
-    sshpass -p "$PASSWORD" ssh -o StrictHostKeyChecking=no "${SERVER_USER}@${SERVER_IP}" "bash /tmp/ssh-setup.sh && rm /tmp/ssh-setup.sh"
-    
-    rm /tmp/ssh-setup.sh
-    
-    echo ""
-    echo "✅ Ключ успешно скопирован на сервер!"
-else
-    echo "⚠️  sshpass не установлен."
-    echo ""
-    echo "Установите sshpass:"
-    echo "  Ubuntu/Debian: sudo apt-get install sshpass"
-    echo "  macOS: brew install sshpass"
-    echo "  или используйте ssh-copy-id:"
-    echo "  ssh-copy-id $SERVER_USER@$SERVER_IP"
+key=${2:-"$HOME/.ssh/id_ed25519.pub"}
+if [[ $# -lt 2 && ! -f "$key" ]]; then
+    key="$HOME/.ssh/id_rsa.pub"
 fi
-
-echo ""
-echo "=== Проверка подключения ==="
-echo "Проверьте подключение:"
-echo "  ssh $SERVER_USER@$SERVER_IP"
-echo ""
-echo "Если всё настроено правильно, пароль запрашиваться не будет!"
-
+if [[ "$key" != *.pub || ! -f "$key" ]]; then
+    echo 'Choose an existing public (.pub) key file.' >&2
+    exit 1
+fi
+ssh-keygen -lf "$key" >/dev/null
+ssh-copy-id -i "$key" "$target"
+echo 'Keep your current session open. Verify a new key-only login in a separate window.'

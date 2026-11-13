@@ -5,7 +5,7 @@
     "server": {
       "host": "45.141.76.200",
       "user": "root",
-      "ssh_access": "Настроен парольный доступ, пароль: R9AuQIMM&gt&",
+      "ssh_access": "Используйте проверенный SSH-ключ владельца.",
       "server_path": "/var/www/server",
       "main_file": "/var/www/server/index.js",
       "port": 8080,
